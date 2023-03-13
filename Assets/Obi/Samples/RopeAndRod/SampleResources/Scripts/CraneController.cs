@@ -13,12 +13,13 @@ public class CraneController : MonoBehaviour {
 		cursor = GetComponentInChildren<ObiRopeCursor>();
 		rope = cursor.GetComponent<ObiRope>();
 	}
-	
+	public float ropeLength; 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey(KeyCode.W)){
 			if (rope.restLength > 6.5f)
 				cursor.ChangeLength(rope.restLength - 1f * Time.deltaTime);
+				
 		}
 
 		if (Input.GetKey(KeyCode.S)){
@@ -32,5 +33,7 @@ public class CraneController : MonoBehaviour {
 		if (Input.GetKey(KeyCode.D)){
 			transform.Rotate(0,-Time.deltaTime*15f,0);
 		}
+
+		ropeLength = rope.restLength; 
 	}
 }

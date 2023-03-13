@@ -16,36 +16,32 @@ namespace Obi
     {
         private List<int> m_ParticleIndices;
         private List<int> m_ConstraintIndices;
-        private List<List<int>> m_ConstraintsPerParticle;
+        private List<int>[] m_ConstraintsPerParticle;
 
         public IReadOnlyList<int> particleIndices => m_ParticleIndices.AsReadOnly();
         public IReadOnlyList<int> constraintIndices => m_ConstraintIndices.AsReadOnly();
 
-        public GraphColoring(int particleCount = 0)
+        public GraphColoring(int particleCount)
         {
             m_ParticleIndices = new List<int>();
             m_ConstraintIndices = new List<int>();
-            m_ConstraintsPerParticle = new List<List<int>>(particleCount);
-            for (int i = 0; i < particleCount; ++i)
-                m_ConstraintsPerParticle.Add(new List<int>());
+            m_ConstraintsPerParticle = new List<int>[particleCount];
+            for (int i = 0; i < m_ConstraintsPerParticle.Length; ++i)
+                m_ConstraintsPerParticle[i] = new List<int>();
         }
 
         public void Clear()
         {
             m_ParticleIndices.Clear();
             m_ConstraintIndices.Clear();
-            for (int i = 0; i < m_ConstraintsPerParticle.Count; ++i)
+            for (int i = 0; i < m_ConstraintsPerParticle.Length; ++i)
                 m_ConstraintsPerParticle[i].Clear();
         }
 
         public void AddConstraint(int[] particles)
         {
             for (int i = 0; i < particles.Length; ++i)
-            {
-                while (particles[i] >= m_ConstraintsPerParticle.Count)
-                    m_ConstraintsPerParticle.Add(new List<int>());
                 m_ConstraintsPerParticle[particles[i]].Add(m_ConstraintIndices.Count);
-            }
 
             m_ConstraintIndices.Add(m_ParticleIndices.Count);
             m_ParticleIndices.AddRange(particles);
