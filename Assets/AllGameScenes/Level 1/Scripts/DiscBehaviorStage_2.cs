@@ -5,19 +5,20 @@ using UnityEngine;
 public class DiscBehaviorStage_2 : MonoBehaviour
 {
     public LevelManager levelManager;
-
+    public float snapDiscThreshold = 0.1f;
+    public Transform discOnPlayerTrans; 
     public Animator animator_controller;
     public DraggingBehavior currentDB;
 
     public bool readyToPutIntoPlayer = false;
-    private Vector3 positionOfRecordOnPlayer;
-
+    public Vector3 positionOfRecordOnPlayer;
+    public float distance; 
 
     public GlobalValues globalValue;
     // Start is called before the first frame update
     void Start()
     {
-        positionOfRecordOnPlayer = new Vector3(3.256f, 0f, 0.01039798f);
+        positionOfRecordOnPlayer = discOnPlayerTrans.position;
 
         Vector3 startingPosition = globalValue.stage1RecordPosition;
  
@@ -28,6 +29,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         currentDB = GetComponent<DraggingBehavior>();
 
         currentDB.dragEnterEvent.AddListener(pickedUpY);
+        currentDB.draggingEvent.AddListener(checkingDistance);
         currentDB.dragEndEvent.AddListener(putDownY);
     }
 
@@ -49,6 +51,11 @@ public class DiscBehaviorStage_2 : MonoBehaviour
             beginStage3();
         }
 
+    }
+
+    public void checkingDistance()
+    {
+        distance = Vector3.Distance(transform.position, discOnPlayerTrans.position);
     }
 
     private void OnTriggerEnter(Collider other)
