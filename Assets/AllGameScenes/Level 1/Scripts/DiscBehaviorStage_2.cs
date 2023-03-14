@@ -1,25 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
+using UnityEditor.Events;
 public class DiscBehaviorStage_2 : MonoBehaviour
 {
     public LevelManager levelManager;
-    public Transform discMesh; 
+    public Transform discMesh;
     public float snapDiscThreshold = 0.1f;
-    public Transform discOnPlayerTrans; 
+    public Transform discOnPlayerTrans;
     public Animator animator_controller;
     public DraggingBehavior currentDB;
 
     public bool readyToPutIntoPlayer = false;
     public Vector3 positionOfRecordOnPlayer;
     public float distance;
-    public float pickUpHeight = 1f; 
+    public float pickUpHeight = 1f;
     public GlobalValues globalValue;
 
     public Vector3 startingPosition;
 
-    IEnumerator lerpCoroutine; 
+    IEnumerator lerpCoroutine;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +28,11 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         startingPosition = globalValue.stage1RecordPosition;
         this.transform.position = startingPosition;
 
-        startingPosition = discMesh.localPosition; 
+        startingPosition = discMesh.localPosition;
         currentDB = GetComponent<DraggingBehavior>();
 
         currentDB.dragEnterEvent.AddListener(pickedUpY);
-        currentDB.draggingEvent.AddListener(checkingDistance);
+
         currentDB.dragEndEvent.AddListener(putDownY);
     }
     float startTime;
@@ -40,11 +40,11 @@ public class DiscBehaviorStage_2 : MonoBehaviour
     public void pickedUpY()
     {
         startTime = Time.time;
-        if(lerpCoroutine != null)
+        if (lerpCoroutine != null)
         {
             StopCoroutine(lerpCoroutine);
         }
-        
+
         lerpCoroutine = lerpLocalPosition(discMesh.localPosition, startingPosition + Vector3.up * pickUpHeight, discMesh);
         StartCoroutine(lerpCoroutine);
     }
@@ -56,7 +56,16 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         {
             StopCoroutine(lerpCoroutine);
         }
-        lerpCoroutine = lerpLocalPosition(discMesh.localPosition, startingPosition, discMesh);
+        if(readyToPutIntoPlayer)
+        {
+            UnityEventTools.AddPersistentListener(lerpFinishEvent, beginStage3);
+            lerpCoroutine = lerpPosition(discMesh.position, positionOfRecordOnPlayer, discMesh);
+        }
+        else
+        {
+            lerpCoroutine = lerpLocalPosition(discMesh.localPosition, startingPosition, discMesh);
+        }
+        
         StartCoroutine(lerpCoroutine);
 
     }
@@ -64,7 +73,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
     {
 
         float journey = (Time.time - startTime) / animationDuration;
-        print(journey);
+
         movingTrans.localPosition = Vector3.Lerp(start, end, journey);
         yield return new WaitForFixedUpdate();
 
@@ -75,7 +84,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         }
         else
         {
-            print(movingTrans.localPosition);
+
             movingTrans.localPosition = end;
         }
 
@@ -83,34 +92,27 @@ public class DiscBehaviorStage_2 : MonoBehaviour
 
 
 
-    public void checkingDistance()
-    {
-        distance = Vector3.Distance(transform.position, discOnPlayerTrans.position);
-    }
-
-    void OnTriggerEnter()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+
         print(other.name);
         if (other.name == "Record Player")
         {
-           
-            readyToPutIntoPlayer = true; 
+
+            readyToPutIntoPlayer = true;
         }
     }
 
     void beginStage3()
     {
+        levelManager.nextStageAfterSeconds(animationDuration);
 
-        
     }
 
 
     //===============Helper Script=======================
+
+    public UnityEvent lerpFinishEvent;
     IEnumerator lerpPosition(Vector3 start, Vector3 end, Transform movingTrans)
     {
 
@@ -118,7 +120,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         print(journey);
         movingTrans.position = Vector3.Lerp(start, end, journey);
         yield return new WaitForFixedUpdate();
-
+        
         journey = (Time.time - startTime) / animationDuration;
         if (journey <= animationDuration)
         {
@@ -128,6 +130,10 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         {
             print(movingTrans.position);
             movingTrans.position = end;
+            if(lerpFinishEvent != null)
+            {
+                lerpFinishEvent.Invoke();
+            }
         }
 
     }
