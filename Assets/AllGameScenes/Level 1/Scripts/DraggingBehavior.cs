@@ -82,7 +82,7 @@ public class DraggingBehavior : MonoBehaviour
 
     void onDragEnter()
     {
-
+        Cursor.visible = false;
         dragEnterEvent.Invoke(); 
     }
 
@@ -106,7 +106,7 @@ public class DraggingBehavior : MonoBehaviour
 
     public void onDragEnd()
     {
-
+        Cursor.visible = true;
         dragState = false;
         dragEndEvent.Invoke();
         

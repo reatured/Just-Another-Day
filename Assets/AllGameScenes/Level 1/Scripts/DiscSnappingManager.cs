@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEditor.Events;
 public class DiscSnappingManager : MonoBehaviour
 {
     public PiecesTransform[] childPiecesTransform;
@@ -31,8 +31,8 @@ public class DiscSnappingManager : MonoBehaviour
             currentPT.index = i;
             currentPT.animateTime = pieceSnappingSpeedinSecs;
             currentPT.curve = snappingCurve; 
-            currentDB.dragEndEvent.AddListener(currentPT.checkSnappingDistance);
-
+            //currentDB.dragEndEvent.AddListener(currentPT.checkSnappingDistance);
+            UnityEventTools.AddPersistentListener(currentDB.dragEndEvent, currentPT.checkSnappingDistance);
             //print("add listenneer");
         }
 
@@ -72,8 +72,19 @@ public class DiscSnappingManager : MonoBehaviour
     public GlobalValues globalValue; 
     public void beginStage2()
     {
+
+        DraggingBehavior[] allDbs = GetComponentsInChildren<DraggingBehavior>();
+        foreach(DraggingBehavior db in allDbs)
+        {
+            db.enabled = false;
+        }
+
         print("Begin Stage 2");
         globalValue.sendPositionToStage2(rootTransform.getRootPos());
+
+
+
+
         levelManager.nextStageAfterSeconds(1f);
     }
 }

@@ -24,9 +24,6 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         //startingPosition.y = 0f;
         this.transform.position = startingPosition;
 
-        
-
-
         animator_controller = GetComponentInChildren<Animator>();
         currentDB = GetComponent<DraggingBehavior>();
 
@@ -56,8 +53,10 @@ public class DiscBehaviorStage_2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.name);
         if (other.name == "Record Player")
         {
+           
             readyToPutIntoPlayer = true; 
         }
     }
