@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
+//not used 03-14-2023
 
 public class PlayerBehaviorStage3 : MonoBehaviour
 {
 
     public GameObject toneArmPivot;
     public GameObject toneArmColliderSphere;
-    public bool toneArmDragState = false; 
+    public bool toneArmDragState = false;
 
     public Animation animTest;
 
@@ -22,27 +21,27 @@ public class PlayerBehaviorStage3 : MonoBehaviour
     {
         toneArmColliderSphere.SetActive(false);
 
-        toneArmMinimunY = toneArmColliderSphere.transform.position.y; 
+        toneArmMinimunY = toneArmColliderSphere.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(toneArmDragState == false && Input.GetMouseButtonDown(0))
+        if (toneArmDragState == false && Input.GetMouseButtonDown(0))
         {
-           toneArmDragState = isSelected(toneArmPivot);
-            if (toneArmDragState) startMoveToneArm(); 
+            toneArmDragState = isSelected(toneArmPivot);
+            if (toneArmDragState) startMoveToneArm();
         }
 
         if (toneArmDragState)
         {
-            draggingToneArm(); 
+            draggingToneArm();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if(toneArmDragState)
-            endMoveToneArm();
+            if (toneArmDragState)
+                endMoveToneArm();
         }
     }
 
@@ -87,7 +86,7 @@ public class PlayerBehaviorStage3 : MonoBehaviour
 
     public void startMoveToneArm()
     {
-        if(d_startDraggingText) print("startMove");
+        if (d_startDraggingText) print("startMove");
         toneArmColliderSphere.SetActive(true);
     }
 
@@ -100,7 +99,7 @@ public class PlayerBehaviorStage3 : MonoBehaviour
     //public GameObject debugSphere; 
     public void draggingToneArm()
     {
-        if(d_draggingText) print("dragging");
+        if (d_draggingText) print("dragging");
         sphereHit = isSelected(toneArmColliderSphere);
 
         //debugSphere.transform.position = impactPoint; 
@@ -109,10 +108,10 @@ public class PlayerBehaviorStage3 : MonoBehaviour
 
     public float toneArmPlayThreshold = 1f;
 
-    public LevelManager levelManager; 
+    public LevelManager levelManager;
     public void endMoveToneArm()
     {
-        if(d_endDraggingText) print("endDragging");
+        if (d_endDraggingText) print("endDragging");
         toneArmDragState = false;
 
         float distance = Vector3.Distance(impactPoint, toneArmPlayingPos);
@@ -131,7 +130,7 @@ public class PlayerBehaviorStage3 : MonoBehaviour
     }
     float startingTime;
     public AnimationCurve curve;
-    public float animateTime; 
+    public float animateTime;
     public void startFinishStage()
     {
         startingTime = Time.time;
@@ -141,13 +140,13 @@ public class PlayerBehaviorStage3 : MonoBehaviour
     public IEnumerator finishingStage()
     {
 
-        float journeyTime = (Time.time - startingTime) / animateTime; 
+        float journeyTime = (Time.time - startingTime) / animateTime;
 
         impactPoint = Vector3.Lerp(impactPoint, toneArmPlayingPos, journeyTime);
         toneArmPivot.transform.LookAt(impactPoint);
         yield return new WaitForFixedUpdate();
 
-        if (journeyTime < 1) 
+        if (journeyTime < 1)
         {
             StartCoroutine(finishingStage());
         }
