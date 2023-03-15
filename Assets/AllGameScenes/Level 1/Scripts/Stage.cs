@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
     public GameObject[] objects;
     public int stageIndex;
-    public string cameraTrigger;
 
     private void Awake()
     {
@@ -15,7 +12,6 @@ public class Stage : MonoBehaviour
     public virtual void startStage()
     {
         print(stageIndex);
-        //Camera.main.GetComponent<Animator>().SetTrigger(cameraTrigger);
         for (int i = 0; i < objects.Length; i++)
         {
             GameObject go = objects[i];
@@ -24,11 +20,12 @@ public class Stage : MonoBehaviour
                 go.SetActive(true);
             }
         }
-        
+
     }
 
     public void endStage()
     {
+        print("ending stage" + gameObject.name);
         for (int i = 0; i < objects.Length; i++)
         {
             GameObject go = objects[i];

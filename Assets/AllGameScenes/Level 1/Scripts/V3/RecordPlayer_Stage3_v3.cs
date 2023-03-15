@@ -3,7 +3,7 @@ using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
+
 public class RecordPlayer_Stage3_v3 : MonoBehaviour
 {
     public Collider movementSurface;
@@ -18,9 +18,9 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
 
     public ToneArmHeadBehavior_Stage3_v3 toneArmHead;
 
-    public Collider toneArmPlayTrigger;
+    //public Collider toneArmPlayTrigger;
 
-    AudioSource _audio;
+    public AudioSource _audio;
     public Stage4RecordBehavior disc;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
         yMin = toneArmPivot.position.y;
         UnityEventTools.AddPersistentListener(toneArmHead.toneArmPlayEvent, playRecord);
         UnityEventTools.AddPersistentListener(toneArmHead.toneArmPauseEvent, pauseRecord);
-        _audio = GetComponent<AudioSource>();
+
         disc.enabled = false;
     }
 
@@ -71,6 +71,7 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     private void OnMouseUp()
     {
         canDrag = false;
+
     }
 
     public void playRecord()
@@ -99,39 +100,38 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     }
     //===============Helper Script=======================
 
-    public UnityEvent lerpFinishEvent;
-    public UnityEvent lerpUpdateEvent;
-    float startTime;
-    public float animationDuration;
+    //public UnityEvent lerpFinishEvent;
+    //public UnityEvent lerpUpdateEvent;
+    //float startTime;
+    //public float animationDuration;
 
-    IEnumerator lerpPosition(Vector3 start, Vector3 end, Transform movingTrans)
-    {
+    //IEnumerator lerpPosition(Vector3 start, Vector3 end, Transform movingTrans)
+    //{
 
-        float journey = (Time.time - startTime) / animationDuration;
-        print(journey);
-        movingTrans.position = Vector3.Lerp(start, end, journey);
-        if (lerpUpdateEvent != null)
-        {
-            lerpUpdateEvent.Invoke();
-        }
-        yield return new WaitForFixedUpdate();
+    //    float journey = (Time.time - startTime) / animationDuration;
+    //    print(journey);
+    //    movingTrans.position = Vector3.Lerp(start, end, journey);
+    //    if (lerpUpdateEvent != null)
+    //    {
+    //        lerpUpdateEvent.Invoke();
+    //    }
+    //    yield return new WaitForFixedUpdate();
 
-        journey = (Time.time - startTime) / animationDuration;
-        if (journey <= animationDuration)
-        {
-            StartCoroutine(lerpPosition(start, end, movingTrans));
-        }
-        else
-        {
-            print(movingTrans.position);
-            movingTrans.position = end;
-            if (lerpFinishEvent != null)
-            {
-                lerpFinishEvent.Invoke();
-            }
-        }
-
-    }
+    //    journey = (Time.time - startTime) / animationDuration;
+    //    if (journey <= animationDuration)
+    //    {
+    //        StartCoroutine(lerpPosition(start, end, movingTrans));
+    //    }
+    //    else
+    //    {
+    //        print(movingTrans.position);
+    //        movingTrans.position = end;
+    //        if (lerpFinishEvent != null)
+    //        {
+    //            lerpFinishEvent.Invoke();
+    //        }
+    //    }
+    //}
 
 
     //===============Helper Script=======================

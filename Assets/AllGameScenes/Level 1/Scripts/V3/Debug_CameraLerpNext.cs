@@ -32,21 +32,10 @@ public class Debug_CameraLerpNext : MonoBehaviour
     }
     Vector3 startPos, endPos;
     Quaternion startQua, endQua;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void goToNextCam()
     {
+        lm.nextStage();
         CurrentCam++;
     }
     float startTime = 0f;
@@ -56,7 +45,7 @@ public class Debug_CameraLerpNext : MonoBehaviour
         startTime = Time.time;
         StartCoroutine(animateLerp());
     }
-
+    public LevelManager lm;
     IEnumerator animateLerp()
     {
         float journey = (Time.time - startTime) / lerpDuration;
@@ -69,6 +58,10 @@ public class Debug_CameraLerpNext : MonoBehaviour
         if (journey < 1)
         {
             StartCoroutine(animateLerp());
+        }
+        else
+        {
+            
         }
         
     }
