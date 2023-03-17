@@ -14,7 +14,7 @@ public class ControlMeshVerts : MonoBehaviour
     void Start()
     {
         needle = GameObject.Find("Needle"); 
-        GetComponent<DragObjectScript>().onNeedleDragged += updateVertPos;
+        //GetComponent<DragObjectScript>().onNeedleDragged += updateVertPos;
         GetComponent<MeshRenderer>().enabled = showMesh;
 
         //needle.GetComponent<RopeDragger>().onDrag += updateVertPos;

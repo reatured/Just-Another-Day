@@ -7,7 +7,19 @@ using UnityEngine.Events;
 public class PinOnVertex_L2_V3 : MonoBehaviour
 {
     private Material material;
-    public int index; 
+    public int index;
+    public Vector3 vertPosition; 
+
+    public Vector3 Pin
+    {
+        get { return transform.position; }
+        set {
+            transform.position = value;
+            print("updateTransform");
+        }
+    }
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -23,6 +35,11 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    public void updatePosOnMesh()
     {
         
     }
@@ -43,7 +60,9 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
 
         float journey = (Time.time - startTime) / animationDuration;
         //print("journey:" + journey);
+        
         movingTrans.position = Vector3.Lerp(start, end, journey);
+        vertPosition = movingTrans.position;
         material.color = new Color(journey, journey, 0);
         yield return new WaitForFixedUpdate();
 

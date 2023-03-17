@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 //      /0-1-2-3-C-5-6-7-8-c\           :pins orders        || center || pins orders, current = 9
 // Head|                     |Tail      :tatal 10 pins;
 //      \4-3-2-1-C-0-0-0-0-c/           :Distance to center || center || pins
@@ -19,6 +22,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
 
     public GameObject debugText_distance;
 
+    public bool alignToModel = true;
     public GameObject model;
     public Mesh modelMesh;
     public Vector3[] vertices;
@@ -44,34 +48,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
     }
     private int activePins;
     public AnimationCurve tearShape;
-    public void initiateVariables()
-    {
-        modelMesh = model.GetComponent<MeshFilter>().mesh;
-        vertices = modelMesh.vertices;
-
-
-        if (pinsLeft.Length != pinsRight.Length)
-        {
-            print("uneven pins");
-        }
-
-        for (int i = 0; i < pinsLeft.Length; i++)
-        {
-            PinOnVertex_L2_V3 pin = pinsLeft[i];
-            getClosestVertex(pin);
-            pin.animationDuration = pin_animationDuration;
-        }
-
-        for (int i = 0; i < pinsRight.Length; i++)
-        {
-
-            PinOnVertex_L2_V3 pin = pinsRight[i];
-            getClosestVertex(pin);
-            pin.animationDuration = pin_animationDuration;
-        }
-
-        
-    }
+    
 
 
     // Start is called before the first frame update
@@ -82,35 +59,67 @@ public class MeshManager_L2_V3 : MonoBehaviour
             print("uneven pins");
         }
 
+        
+        totalLength = Vector3.Distance(head.position, tail.position);
+        totalPins = pinsLeft.Length;//10
+        CurrentPin = pinsLeft.Length;
+
+        if (alignToModel) initiateVariables();
+
+        //attachPinsOnVertices();
+        setAnimationDuration(pin_animationDuration);
+        nextPin();
+        
+
+    }
+
+    public void setAnimationDuration(float t)
+    {
         for (int i = 0; i < pinsLeft.Length; i++)
         {
             PinOnVertex_L2_V3 pin = pinsLeft[i];
-            pin.animationDuration = pin_animationDuration;
+            pin.animationDuration = t;
         }
 
         for (int i = 0; i < pinsRight.Length; i++)
         {
 
             PinOnVertex_L2_V3 pin = pinsRight[i];
-            pin.animationDuration = pin_animationDuration;
+            pin.animationDuration = t;
         }
-        totalLength = Vector3.Distance(head.position, tail.position);
-        totalPins = pinsLeft.Length;//10
-        CurrentPin = pinsLeft.Length;
-        //initiateVariables();
-        //attachPinsOnVertices();
-        nextPin();
-
+        animationDuration = t; 
     }
 
-    
+    string debugText = "";
+    public void initiateVariables() //for align pins on the model. 
+    {
+        modelMesh = model.GetComponent<MeshFilter>().mesh;
+        vertices = modelMesh.vertices;
+
+        for (int i = 0; i < pinsLeft.Length; i++)
+        {
+            PinOnVertex_L2_V3 pin = pinsLeft[i];
+            getClosestVertex(pin);
+        }
+
+        for (int i = 0; i < pinsRight.Length; i++)
+        {
+
+            PinOnVertex_L2_V3 pin = pinsRight[i];
+            getClosestVertex(pin);
+        }
+
+        print(debugText);
+    }
+
+
     public void getClosestVertex(PinOnVertex_L2_V3 pin)
     {
         float shortestDist = 1000;
         int shortestIndex = 0;
         for (int i = 0; i < vertices.Length; i++)
         {
-            Vector3 vertexWorldPos = model.transform.TransformPoint(vertices[i]);
+            Vector3 vertexWorldPos = getVertPos(i);
             float currentDist = Vector3.Distance(vertexWorldPos, pin.transform.position);
             if (currentDist < shortestDist)
             {
@@ -119,9 +128,19 @@ public class MeshManager_L2_V3 : MonoBehaviour
             }
         }
         pin.index = shortestIndex;
-        pin.transform.position = vertices[pin.index];
+        pin.transform.position = getVertPos(pin.index);
+        debugText += pin.index + "\n";
     }
 
+    public Vector3 getVertPos(int index)
+    {
+        return model.transform.TransformPoint((Vector3)vertices[index]);    
+    }
+
+    public void setVertPos(PinOnVertex_L2_V3 pin)
+    {
+        vertices[pin.index] = model.transform.InverseTransformPoint(pin.transform.position);    
+    }
     public void attachPinsOnVertices()
     {
 
@@ -129,31 +148,59 @@ public class MeshManager_L2_V3 : MonoBehaviour
 
     public void nextPin()
     {
-        //print(activePins + " ==========================================");
-        //update center
         CurrentPin--; //activePins = this+1
         TearLength = 1f * activePins / totalPins * totalLength;//(9+1)/10
         //pair pins;
-        //pairPins(pinsLeft[currentPin].transform, pinsRight[currentPin].transform, 1); //width = 200, pins = 10
-        string debugTextDistance = "";
         for (int i = 0; i < activePins; i++)
         {
             pairPins(pinsLeft[i].transform, pinsRight[i].transform, (i + 1) * 1f / (activePins + 1));//currentPin = 9
         }
-        if(activePins < totalPins) // Stitches the previous pair pins.
+        if (activePins < totalPins) // Stitches the previous pair pins.
         {
             pairPins(pinsLeft[activePins].transform, pinsRight[activePins].transform, 1);//currentPin = 9
         }
-        
-        
-        for (int i = 0; i < totalPins; i++)
-        {
-            debugTextDistance += "" + Vector3.Distance(pinsLeft[i].transform.position, pinsRight[i].transform.position).ToString() + "\n";
 
-        }
-        //print(debugTextDistance);
+        startTime = Time.time;
+        StartCoroutine(stitchingTheTear());
+
     }
 
+    float startTime;
+    float animationDuration;
+    public UnityEvent lerpFinishEvent;
+    IEnumerator stitchingTheTear()
+    {
+        float journey = (Time.time - startTime) / animationDuration;
+        for(int i = 0;i < activePins;i++)
+        {
+            setVertPos(pinsLeft[i]);
+            setVertPos(pinsRight[i]);
+
+        }
+        if (activePins < totalPins) // Stitches the previous pair pins.
+        {
+            setVertPos(pinsLeft[activePins]);
+            setVertPos(pinsRight[activePins]);
+        }
+
+        modelMesh.vertices = vertices;
+
+
+        yield return new WaitForFixedUpdate();
+        journey = (Time.time - startTime) / animationDuration;
+        if (journey <= 1)
+        {
+            StartCoroutine(stitchingTheTear());
+        }
+        else
+        {
+
+            if (lerpFinishEvent != null)
+            {
+                lerpFinishEvent.Invoke();
+            }
+        }
+    }
     public void pairPins(Transform left, Transform right, float percentile)
     {
 
@@ -168,7 +215,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         //percentil = 1 is center, must be smaller than 1
         Vector3 mid = (left.position + right.position) / 2;
         Vector3 tempVec = Vector3.Lerp(left.position, mid, lerpPercentage);
-        
+
         left.GetComponent<PinOnVertex_L2_V3>().lerpTowards(tempVec);
         right.GetComponent<PinOnVertex_L2_V3>().lerpTowards(Vector3.Lerp(right.position, mid, lerpPercentage));
 

@@ -17,7 +17,7 @@ public class ToneArmHeadBehavior_Stage3_v3 : MonoBehaviour
     public UnityEvent toneArmPlayEvent;
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
+
         if (other.name != playTrigger.name) return;
         if (toneArmPlayEvent != null)
         {
