@@ -1,71 +1,123 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BearDraggingBehavior_L2 : MonoBehaviour
 {
     public Transform restTransform;
     public Transform pickUpTransform;
-    float startTime = 0;
-    public float lerpDuration;
-    public bool pickedUp = false; 
+
+    public Transform movingObjTrans;
+    bool pickedUp = false;
+    IEnumerator coroutine;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnMouseDown()
     {
-
-
-        print(Time.time - startTime);
-        if (Time.time - startTime < lerpDuration) return;
-        startTime = Time.time;
-        print("clicked");
-        StartCoroutine(lerpToTargetTrans());
-
-        
-    }
-
-    IEnumerator lerpToTargetTrans()
-    {
-        float journeyTime = Time.time - startTime;
-        if (pickedUp == false)
+        if (coroutine != null)
         {
-            lerpTransform(this.transform, restTransform, pickUpTransform, journeyTime / lerpDuration);
+            StopAllCoroutines();
+            print("StopCoroutine");
+
+        }
+        animationDuration = animationDurationMax * journey;
+        animationDuration = Mathf.Min(animationDuration, animationDurationMax);
+        print("animation duration: " + animationDuration);
+        startTime = Time.time;
+        journey = 0;
+        if (!pickedUp)
+        {
+            coroutine = lerpRotation(movingObjTrans.rotation, pickUpTransform.rotation, movingObjTrans);
+            StartCoroutine(coroutine);
+            coroutine = lerpPosition(movingObjTrans.position, pickUpTransform.position, movingObjTrans);
+            pickedUp = true;
         }
         else
         {
-            lerpTransform(this.transform, pickUpTransform, restTransform, journeyTime / lerpDuration);
+            coroutine = lerpRotation(movingObjTrans.rotation, restTransform.rotation, movingObjTrans);
+            StartCoroutine(coroutine);
+            coroutine = lerpPosition(movingObjTrans.position, restTransform.position, movingObjTrans);
+            pickedUp = false;
         }
         
         
+        StartCoroutine(coroutine);  
+
+
+
+
+    }
+
+
+
+    //===============Helper Script=======================
+    float startTime = 0;
+    public float animationDurationMax;
+    float animationDuration;
+    public UnityEvent lerpFinishEvent;
+    float journey = 1;
+    IEnumerator lerpPosition(Vector3 start, Vector3 end, Transform movingTrans)
+    {
+        
+        journey = (Time.time - startTime) / animationDuration;
+        
+        movingTrans.position = Vector3.Lerp(start, end, journey);
+        //print("running" + Vector3.Lerp(start.position, end.position, journey) + "\nJourney" + journey);
 
         yield return new WaitForFixedUpdate();
-        if (journeyTime < lerpDuration)
+
+        journey = (Time.time - startTime) / animationDuration;
+        if (journey < 1)
         {
-            StartCoroutine(lerpToTargetTrans());
+            StartCoroutine(lerpPosition(start, end, movingTrans));
         }
         else
         {
-            pickedUp = !pickedUp;
-        }
-    }
-    //===============Helper Script=======================
+            print(movingTrans.position);
+            movingTrans.position = end;
 
-    void lerpTransform(Transform target, Transform start, Transform end, float journey)
+            if (lerpFinishEvent != null)
+            {
+                lerpFinishEvent.Invoke();
+            }
+        }
+
+    }
+
+    IEnumerator lerpRotation(Quaternion start, Quaternion end, Transform movingTrans)
     {
-        Vector3 pos = Vector3.Lerp(start.position, end.position, journey);
-        Quaternion rot = Quaternion.Lerp(start.rotation, end.rotation, journey);
-        target.position = pos;
-        target.rotation = rot;
+        journey = (Time.time - startTime) / animationDuration;
+
+
+        //print("running" + Vector3.Lerp(start.position, end.position, journey) + "\nJourney" + journey);
+        movingTrans.rotation = Quaternion.Slerp(start, end, journey);
+
+        yield return new WaitForFixedUpdate();
+
+        journey = (Time.time - startTime) / animationDuration;
+        if (journey < 1)
+        {
+            StartCoroutine(lerpRotation(start, end, movingTrans));
+        }
+        else
+        {
+            print(movingTrans.position);
+            movingTrans.rotation = end;
+            if (lerpFinishEvent != null)
+            {
+                lerpFinishEvent.Invoke();
+            }
+        }
     }
 
 }

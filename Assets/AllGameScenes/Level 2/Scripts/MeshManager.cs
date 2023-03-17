@@ -19,7 +19,7 @@ public class MeshManager : MonoBehaviour
     void Start()
     {
 
-        needles = GetComponentsInChildren<ControlMeshVerts>();
+        //needles = GetComponentsInChildren<ControlMeshVerts>();
         //initiate array of PDverts; 
         initializeData(); 
 
@@ -41,7 +41,7 @@ public class MeshManager : MonoBehaviour
         print(pdVerts.Length);
         for (int i = 0; i < pdVerts.Length; i++)
         {
-            PDvert cur = new PDvert(model.transform.TransformPoint(vertices[i]), i);
+            PDvert cur = new PDvert(model.transform.TransformPoint(vertices[i]), i);//save world position and index = current pdv
             pdVerts[i] = cur;
             debugText += cur.index + ": " + cur.position.x + "\n";
         }

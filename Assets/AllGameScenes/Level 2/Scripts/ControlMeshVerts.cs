@@ -17,7 +17,7 @@ public class ControlMeshVerts : MonoBehaviour
         GetComponent<DragObjectScript>().onNeedleDragged += updateVertPos;
         GetComponent<MeshRenderer>().enabled = showMesh;
 
-        needle.GetComponent<RopeDragger>().onDrag += updateVertPos;
+        //needle.GetComponent<RopeDragger>().onDrag += updateVertPos;
     }
     public void initate()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stage4RecordBehavior : MonoBehaviour
 {
+    //just rotating the disc
     private float startTime;
     public float rotateSpeed; 
     // Start is called before the first frame update

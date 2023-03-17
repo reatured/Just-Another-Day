@@ -78,7 +78,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         yield return new WaitForFixedUpdate();
 
         journey = (Time.time - startTime) / animationDuration;
-        if (journey <= animationDuration)
+        if (journey < 1)
         {
             StartCoroutine(lerpLocalPosition(start, end, movingTrans));
         }
@@ -122,7 +122,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         yield return new WaitForFixedUpdate();
         
         journey = (Time.time - startTime) / animationDuration;
-        if (journey <= animationDuration)
+        if (journey < 1)
         {
             StartCoroutine(lerpPosition(start, end, movingTrans));
         }
