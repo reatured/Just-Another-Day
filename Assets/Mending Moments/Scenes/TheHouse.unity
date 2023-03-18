@@ -2716,7 +2716,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1796a4c1968f73441976cc7f2195c539, type: 2}
+  - {fileID: 2100000, guid: 068764f1294abe64394806195805b057, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4296,11 +4296,12 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 20b5d5f32e549c54c9a84e126f29dfc3, type: 3}
   - {fileID: 2800000, guid: f089b6bef8a13cd41867931525aab7da, type: 3}
   - {fileID: 2800000, guid: 6a9745ec30830bf46a6a0600e7bc3654, type: 3}
-  - {fileID: 2800000, guid: 5c59b84c65d632744834a5bc573201ad, type: 3}
   paintingPaper: {fileID: 1026154920}
   paintingTexture: {fileID: 2800000, guid: 5c59b84c65d632744834a5bc573201ad, type: 3}
-  paintingMaterial: {fileID: 0}
+  paintingPaper_Mat: {fileID: 0}
   contactPoint: {x: 0, y: 0, z: 0}
+  colorMap_Texture: {fileID: 2800000, guid: 52c81a144d10c3c40bd3731653586e6c, type: 3}
+  colorStep: 0
   movementPlane: {fileID: 1129450558}
   impactPoint: {x: 0, y: 0, z: 0}
   length: 0
