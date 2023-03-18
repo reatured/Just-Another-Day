@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEditor.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -7,11 +9,11 @@ public class LevelManager : MonoBehaviour
     public int totalStage;
     public int currentStage = 0;
 
-    [Range(1, 4)]
+    [Range(1, 5)]
     public int startFromStage = 1;
 
 
-
+    public UnityEvent setCamEvent; 
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,15 @@ public class LevelManager : MonoBehaviour
         {
             stages[i].stageIndex = i + 1;
         }
-
+        if(setCamEvent != null)
+        {
+            setCamEvent.Invoke();
+        }
+    }
+    public Debug_CameraLerpNext camManager;
+    public void setCam()
+    {
+        camManager.CurrentCam = startFromStage-1;
     }
 
 

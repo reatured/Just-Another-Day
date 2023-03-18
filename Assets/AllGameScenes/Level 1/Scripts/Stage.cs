@@ -25,7 +25,7 @@ public class Stage : MonoBehaviour
 
     public void endStage()
     {
-        print("ending stage" + gameObject.name);
+        //print("ending stage" + gameObject.name);
         for (int i = 0; i < objects.Length; i++)
         {
             GameObject go = objects[i];
