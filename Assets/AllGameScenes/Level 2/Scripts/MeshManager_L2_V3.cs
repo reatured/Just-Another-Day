@@ -109,7 +109,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
             getClosestVertex(pin);
         }
 
-        print(debugText);
+        //print(debugText);
     }
 
 

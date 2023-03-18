@@ -8,10 +8,31 @@ public class BrushBehavior_L3 : MonoBehaviour
 
     public Transform movingObjTrans;
     bool pickedUp = false;
+    public bool PickedUp
+    {
+        get { return pickedUp; }
+        set
+        {
+            pickedUp = value;
+
+            if (pickedUp)
+            {
+                Cursor.visible = false;
+                copyTransform(pickUpTransform, movingObjTrans);
+            }
+            else
+            {
+                Cursor.visible = true;
+                copyTransform(restTransform, movingObjTrans);
+            }
+
+        }
+    }
 
     public GameObject brushHead; 
     private Material mat; 
     private Color brushColor = Color.white;
+    public Painting_L3 paintingManager; 
     public Color BrushColor
     {
         get { return brushColor; }
@@ -25,39 +46,28 @@ public class BrushBehavior_L3 : MonoBehaviour
         movementPlane = new Plane(Vector3.up, pickUpTransform.position);
         mat  = brushHead.GetComponent<MeshRenderer>().material;
     }
-    public bool PickedUp
-    {
-        get { return pickedUp; }
-        set
-        {
-            pickedUp = value;
-
-            if(pickedUp )
-            {
-                Cursor.visible = false;
-                copyTransform(pickUpTransform, transform);
-            }
-            else
-            {
-                Cursor.visible = true;
-                copyTransform(restTransform, transform);
-            }
-
-        }
-    }
+    
 
 
     private void OnMouseDown()
     {
-        if(!pickedUp)
+        if(!PickedUp)
         {
             PickedUp = true;
+
         }
         else
         {
-            if (getImpactPoint(brushRestCollider))
+            if (getImpactPoint(brushRestCollider, getRay(transform, brushHead.transform)))
             {
-                PickedUp = false; 
+                PickedUp = false;
+            }
+            else
+            {
+                if (getImpactPoint(paperCollider, getRay(transform, brushHead.transform)))
+                {
+                    paintingManager.paintOnPaper(impactPoint);
+                }
             }
         }
 
@@ -66,10 +76,10 @@ public class BrushBehavior_L3 : MonoBehaviour
 
     private void Update()
     {
-        if(pickedUp)
+        if(PickedUp)
         {
             getImpactPoint();
-            transform.position = impactPoint;
+            movingObjTrans.position = impactPoint;
         }
     }
 
@@ -78,7 +88,8 @@ public class BrushBehavior_L3 : MonoBehaviour
     //===============Helper Script=======================
     //collider impactPoint;
     public Collider movementSurface;
-    public Collider brushRestCollider; 
+    public Collider brushRestCollider;
+    public Collider paperCollider;
     public Vector3 impactPoint;
     Ray ray;
     RaycastHit hit;
@@ -106,6 +117,27 @@ public class BrushBehavior_L3 : MonoBehaviour
     {
         print(impactPoint);
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (ms.Raycast(ray, out hit, 100))
+        {
+            impactPoint = hit.point;
+            return true;
+
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public Ray getRay(Transform obj1, Transform obj2)
+    {
+        return new Ray(obj1.position, obj2.position - obj1.position);
+    }
+
+    public bool getImpactPoint(Collider ms, Ray _ray)
+    {
+        ray = _ray;
         if (ms.Raycast(ray, out hit, 100))
         {
             impactPoint = hit.point;

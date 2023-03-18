@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
             print("Stage Not Existing");
             
         }
-        print("Go To: " + stageIndex);
+        //print("Go To: " + stageIndex);
         if (stageIndex - 1 >= 0)
         {
             stages[stageIndex - 1].endStage();

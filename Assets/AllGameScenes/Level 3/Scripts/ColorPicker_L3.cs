@@ -8,6 +8,9 @@ public class ColorPicker_L3 : MonoBehaviour
     public Material material;
 
     public Painting_L3 paintingManager;
+    public int index; 
+
+    public BrushBehavior_L3 brushBehavior;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,19 +26,15 @@ public class ColorPicker_L3 : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
-    {
-        paintingManager.brushColor = color; 
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
+
         if (other.name == "BrushHead")
         {
             
             paintingManager.brushColor = color;
-            other.GetComponentInParent<BrushBehavior_L3>().BrushColor = color; 
+            paintingManager.currentBrushColorIndex = index;
+            brushBehavior.BrushColor = color; 
         }
     }
 }

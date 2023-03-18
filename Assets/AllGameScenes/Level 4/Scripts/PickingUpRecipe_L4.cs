@@ -4,6 +4,7 @@ using UnityEngine;
 public class PickingUpRecipe_L4 : MonoBehaviour
 {
     public Transform trans_pickedUp, trans_rest;
+    public Transform movingObjTrans;
     bool pickedUp = false;
     public bool PickedUp
     {
@@ -33,11 +34,11 @@ public class PickingUpRecipe_L4 : MonoBehaviour
 
     void pickUp()
     {
-        copyTransform(trans_pickedUp, transform);
+        copyTransform(trans_pickedUp, movingObjTrans);
     }
     void pickDown()
     {
-        copyTransform(trans_rest, transform);
+        copyTransform(trans_rest, movingObjTrans);
     }
 
     void copyTransform(Transform from, Transform to)

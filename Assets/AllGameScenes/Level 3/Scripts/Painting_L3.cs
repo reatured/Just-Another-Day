@@ -11,11 +11,45 @@ public class Painting_L3 : MonoBehaviour
 
 
     public Texture2D colorMap_Texture; 
-    public float colorStep; 
+    public float colorStep;
 
+    public Transform restTransform;
+    public Transform pickUpTransform;
+    public Transform movingObjTrans;
+    bool pickedUp = false;
+
+    public ColorBlock[] blocks = new ColorBlock[6];
+    public int[] CorrectColorOrder;
+    public int currentBrushColorIndex = 0; 
+
+
+    public BrushBehavior_L3 brushBehavior;
+    public bool PickedUp
+    {
+        get { return pickedUp; }
+        set
+        {
+            pickedUp = value;
+
+            if (pickedUp)
+            {
+
+                copyTransform(pickUpTransform, movingObjTrans);
+            }
+            else
+            {
+                copyTransform(restTransform, movingObjTrans);
+            }
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
+        for(int i = 0; i < blocks.Length; i++)
+        {
+            blocks[i] = new ColorBlock(CorrectColorOrder[i]); //0~5
+        }
         getPaperSize();
         paintingPaper_Mat = paintingPaper.GetComponent<MeshRenderer>().materials[0];
 
@@ -29,52 +63,52 @@ public class Painting_L3 : MonoBehaviour
 
             paintingPaper_Mat.SetColor(id, Color.white);
         }
-        //paintingTexture = new Texture2D(3300, 2550);
-
-        //for (int y = 0; y < colorMap_Texture.height; y++)
-        //{
-        //    for (int x = 0; x < colorMap_Texture.width; x++)
-        //    {
-
-        //        Color pixelColor = new Color(0,0,0,0);
-        //        for(int i =  0; i < layers.Length; i++)
-        //        {
-        //            int _x = x / colorMap_Texture.width * layers[i].width;
-        //            int _y = y / colorMap_Texture.height * layers[i].height;
-        //            pixelColor += layers[i].GetPixel(_x, _y);
-
-        //        }
-        //        colorMap_Texture.SetPixel(x, y, pixelColor) ;
-        //    }
-        //}
-        //colorMap_Texture.Apply();
-        //colorMap_mat.SetTexture("Mask_0", colorMap_Texture);
-
-        //print(paintingTexture.GetPixel(20, 20));
-
-        //paintingMaterial.SetTexture("_Texture2D", paintingTexture);
-        paintingPaper_Mat.SetVector("_ClickedPos", new Vector2(1, 1));
     }
 
     Vector2 uv = Vector2.zero;
     private void OnMouseDown()
     {
-        contactPoint = getImpactPoint();
+        PickedUp = !PickedUp;
+        //paintOnPaper(getImpactPoint());
+    }
+
+    public void paintOnPaper(Vector3 _contactPoint)
+    {
+        contactPoint = _contactPoint;
         Vector3 contactVec = contactPoint - b.position;
         uv.x = Vector3.Dot(contactVec, widthVec) / Vector3.SqrMagnitude(widthVec);
         uv.y = Vector3.Dot(contactVec, lengthVec) / Vector3.SqrMagnitude(lengthVec);
-        print(contactVec);
-        print(uv);
+  
 
         float positionValue = colorMap_Texture.GetPixel((int)(uv.x * colorMap_Texture.width), (int)(uv.y * colorMap_Texture.height)).r;
-        print(positionValue);
-        
 
-        int colorBlock = (int)(positionValue / colorStep);
+
+
+        int colorBlock = (int)(positionValue / colorStep); //0~5
         print(colorBlock);
-        string colorID = "Color_" + (colorBlock+1);
+        string colorID = "Color_" + (colorBlock + 1);  //1~6
         paintingPaper_Mat.SetColor(colorID, brushColor);
 
+
+        blocks[colorBlock].changeColor(currentBrushColorIndex);
+
+        string result = "";
+        bool checkingResult = true;
+        for(int i = 0; i < blocks.Length; i++) {
+            result += blocks[i].result.ToString();
+            if (blocks[i].result == false)
+            {
+                checkingResult = false;
+            }
+        }
+        print(result);
+
+        if(checkingResult )
+        {
+            print("Done");
+            PickedUp = true;
+            brushBehavior.PickedUp = false;
+        }
     }
 
     public Color brushColor; 
@@ -116,4 +150,41 @@ public class Painting_L3 : MonoBehaviour
 
     }
 
+    void copyTransform(Transform from, Transform to)
+    {
+        to.position = from.position;
+        to.rotation = from.rotation;
+        to.localScale = from.localScale;
+    }
+
+}
+
+
+public class ColorBlock
+{
+    public int colorIndex;
+    public int currentColor;
+    public bool result; 
+    public ColorBlock(int colorIndex)
+    {
+        this.colorIndex = colorIndex;
+        this.currentColor = 0;
+        this.result = false;
+    }
+
+    public void changeColor(int index)
+    {
+        this.currentColor = index;
+
+        Debug.Log("currentColor: " + this.currentColor + "\ncolorIndex: " + this.colorIndex);
+
+        if(this.colorIndex == this.currentColor)
+        {
+            this.result = true;
+        }
+        else
+        {
+            this.result = false; 
+        }
+    }
 }

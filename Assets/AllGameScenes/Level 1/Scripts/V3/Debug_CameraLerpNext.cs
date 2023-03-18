@@ -15,7 +15,7 @@ public class Debug_CameraLerpNext : MonoBehaviour
             startQua = cams[currentCam].rotation;
 
             int a = currentCam >= cams.Length? 0 : value;
-            print( a);
+
             if (a >= cams.Length)
             {
                 currentCam = 0;
