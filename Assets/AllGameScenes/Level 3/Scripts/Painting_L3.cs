@@ -72,8 +72,12 @@ public class Painting_L3 : MonoBehaviour
 
         int colorBlock = (int)(positionValue / colorStep);
         print(colorBlock);
+        string colorID = "Color_" + (colorBlock+1);
+        paintingPaper_Mat.SetColor(colorID, brushColor);
+
     }
 
+    public Color brushColor; 
 
     //===============Helper Script=======================
     //collider impactPoint;
