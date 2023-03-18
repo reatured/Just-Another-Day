@@ -27,4 +27,15 @@ public class ColorPicker_L3 : MonoBehaviour
     {
         paintingManager.brushColor = color; 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print(other.name);
+        if (other.name == "BrushHead")
+        {
+            
+            paintingManager.brushColor = color;
+            other.GetComponentInParent<BrushBehavior_L3>().BrushColor = color; 
+        }
+    }
 }
