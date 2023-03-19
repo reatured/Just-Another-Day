@@ -1,4 +1,3 @@
-using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,7 +11,7 @@ public class DragObjectScript : MonoBehaviour
     private void Start()
     {
         pinBehavior = GetComponent<PinOnVertex_L2_V3>();
-        UnityEventTools.AddPersistentListener(dragEvent, pinBehavior.updatePosOnMesh);
+        dragEvent.AddListener(pinBehavior.updatePosOnMesh);
     }
     void OnMouseDown()
     {

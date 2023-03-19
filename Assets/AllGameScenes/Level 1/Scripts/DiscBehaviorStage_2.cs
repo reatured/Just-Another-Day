@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor.Events;
 public class DiscBehaviorStage_2 : MonoBehaviour
 {
     public LevelManager levelManager;
@@ -56,16 +55,17 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         {
             StopCoroutine(lerpCoroutine);
         }
-        if(readyToPutIntoPlayer)
+        if (readyToPutIntoPlayer)
         {
-            UnityEventTools.AddPersistentListener(lerpFinishEvent, beginStage3);
+
+            lerpFinishEvent.AddListener(beginStage3);
             lerpCoroutine = lerpPosition(discMesh.position, positionOfRecordOnPlayer, discMesh);
         }
         else
         {
             lerpCoroutine = lerpLocalPosition(discMesh.localPosition, startingPosition, discMesh);
         }
-        
+
         StartCoroutine(lerpCoroutine);
 
     }
@@ -120,7 +120,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         print(journey);
         movingTrans.position = Vector3.Lerp(start, end, journey);
         yield return new WaitForFixedUpdate();
-        
+
         journey = (Time.time - startTime) / animationDuration;
         if (journey < 1)
         {
@@ -130,7 +130,7 @@ public class DiscBehaviorStage_2 : MonoBehaviour
         {
             print(movingTrans.position);
             movingTrans.position = end;
-            if(lerpFinishEvent != null)
+            if (lerpFinishEvent != null)
             {
                 lerpFinishEvent.Invoke();
             }

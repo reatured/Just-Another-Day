@@ -1,4 +1,3 @@
-using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,9 +6,9 @@ public class FoodPickUp_L4_V3 : MonoBehaviour
     public int addOrder = 2;
     public Vector3 originalPos;
 
-    public GameObject recipeCheckerObj; 
-    private RecipeChecker_L4_V3 recipeChecker; 
-    
+    public GameObject recipeCheckerObj;
+    private RecipeChecker_L4_V3 recipeChecker;
+
     // Start is called before the first frame update
     void Start()
     {

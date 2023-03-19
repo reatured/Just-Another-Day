@@ -58,13 +58,13 @@ public class BrushBehavior_L3 : MonoBehaviour
         }
         else
         {
-            if (getImpactPoint(brushRestCollider, getRay(transform, brushHead.transform)))
+            if (getImpactPoint(brushRestCollider, getRay(Camera.main.transform, brushHead.transform)))
             {
                 PickedUp = false;
             }
             else
             {
-                if (getImpactPoint(paperCollider, getRay(transform, brushHead.transform)))
+                if (getImpactPoint(paperCollider, getRay(Camera.main.transform, brushHead.transform)))
                 {
                     paintingManager.paintOnPaper(impactPoint);
                 }
@@ -73,14 +73,21 @@ public class BrushBehavior_L3 : MonoBehaviour
 
         
     }
-
+    public Vector3 offset; 
     private void Update()
     {
         if(PickedUp)
         {
             getImpactPoint();
-            movingObjTrans.position = impactPoint;
+            movingObjTrans.position = impactPoint + offset;
+            if (Input.GetMouseButton(0))
+            {
+                
+
+            }
         }
+
+        
     }
 
 

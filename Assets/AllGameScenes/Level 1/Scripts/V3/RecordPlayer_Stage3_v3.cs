@@ -1,4 +1,3 @@
-using UnityEditor.Events;
 using UnityEngine;
 
 
@@ -24,8 +23,8 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     void Start()
     {
         yMin = toneArmPivot.position.y;
-        UnityEventTools.AddPersistentListener(toneArmHead.toneArmPlayEvent, playRecord);
-        UnityEventTools.AddPersistentListener(toneArmHead.toneArmPauseEvent, pauseRecord);
+        toneArmHead.toneArmPlayEvent.AddListener(playRecord);
+        toneArmHead.toneArmPauseEvent.AddListener(pauseRecord);
 
         disc.enabled = false;
     }

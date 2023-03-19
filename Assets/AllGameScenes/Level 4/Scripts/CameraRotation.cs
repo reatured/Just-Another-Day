@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CameraRotation : MonoBehaviour
 {
@@ -10,24 +6,25 @@ public class CameraRotation : MonoBehaviour
     public Transform originalTrans;
     public float rotateSpeed = 1f;
     public Transform mainCam;
-    public Vector2 offset = Vector2.zero;  
+    public Vector2 offset = Vector2.zero;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
-        if(mousePos.y < 0)
+        if (mousePos.y < 0)
         {
             print("y<0");
             //move down
             offset.y += rotateSpeed * Time.deltaTime;
         }
-        else if(mousePos.y > Screen.height) {
+        else if (mousePos.y > Screen.height)
+        {
             print("y>height");
             //move up
             offset.y -= rotateSpeed * Time.deltaTime;
