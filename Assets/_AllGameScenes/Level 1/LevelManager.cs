@@ -4,12 +4,15 @@ using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
+
+    [Range(1, 5)]
+    public int startFromStage = 1;
+    [Space(10)]
     public Stage[] stages;
     public int totalStage;
     public int currentStage = 0;
 
-    [Range(1, 5)]
-    public int startFromStage = 1;
+
 
 
     public UnityEvent setCamEvent; 

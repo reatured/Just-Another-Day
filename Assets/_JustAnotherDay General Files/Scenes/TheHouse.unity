@@ -415,6 +415,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93628959}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &106275071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106275072}
+  m_Layer: 0
+  m_Name: Temp Items
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &106275072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106275071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1042755564}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &133106576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 493508727451809021, guid: 733d8012da1fb3f47a42de9c7a4ecfaa,
@@ -2086,7 +2117,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29594
+  m_Name: pb_Mesh40132
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2590,6 +2621,7 @@ MonoBehaviour:
   objects:
   - {fileID: 1403300346}
   - {fileID: 837517658}
+  - {fileID: 106275071}
   stageIndex: 0
 --- !u!1 &381649439
 GameObject:
@@ -4305,7 +4337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909602431}
   m_Layer: 0
-  m_Name: Temperary Items
+  m_Name: Temp Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4499,7 +4531,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29370
+  m_Name: pb_Mesh39910
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4859,6 +4891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7915963876906266079, guid: 3b92f0a44a3ac83408ef1fce974995b2,
+        type: 3}
+      propertyPath: m_Name
+      value: Game Camera
       objectReference: {fileID: 0}
     - target: {fileID: 7915963877182376140, guid: 3b92f0a44a3ac83408ef1fce974995b2,
         type: 3}
@@ -6646,7 +6683,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29174
+  m_Name: pb_Mesh39712
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10485,7 +10522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c71ca82b02074e4cb19728611e2ad8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - {fileID: 1704136455}
   stageIndex: 0
 --- !u!114 &1092529971 stripped
 MonoBehaviour:
@@ -10604,7 +10642,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29468
+  m_Name: pb_Mesh40008
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10784,7 +10822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1160234426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11555,7 +11593,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29628
+  m_Name: pb_Mesh40166
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11742,6 +11780,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 881422535}
+  - {fileID: 1704136456}
   m_Father: {fileID: 90506532}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13213,7 +13252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1436761329}
   m_Layer: 0
-  m_Name: Perm Item
+  m_Name: Perm Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14497,7 +14536,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29894
+  m_Name: pb_Mesh40440
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14794,7 +14833,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29712
+  m_Name: pb_Mesh40258
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15268,6 +15307,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1704136455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1704136456}
+  m_Layer: 0
+  m_Name: Temp Items
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1704136456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704136455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1258988403}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1712959645
 GameObject:
   m_ObjectHideFlags: 0
@@ -19553,6 +19623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc9589311845b40b655182c914a1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startFromStage: 1
   stages:
   - {fileID: 868989625}
   - {fileID: 364804845}
@@ -19561,7 +19632,6 @@ MonoBehaviour:
   - {fileID: 1088209404}
   totalStage: 0
   currentStage: 0
-  startFromStage: 1
   setCamEvent:
     m_PersistentCalls:
       m_Calls:
@@ -21434,7 +21504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5739341344992867243}
   m_Layer: 0
-  m_Name: Level1 Temp
+  m_Name: Temp Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24259,6 +24329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc9589311845b40b655182c914a1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startFromStage: 1
   stages:
   - {fileID: 6493262781912973229}
   - {fileID: 6493262780990542435}
@@ -24266,7 +24337,6 @@ MonoBehaviour:
   - {fileID: 6493262781272180850}
   totalStage: 0
   currentStage: 0
-  startFromStage: 1
   setCamEvent:
     m_PersistentCalls:
       m_Calls: []
