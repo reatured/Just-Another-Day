@@ -1,5 +1,6 @@
+using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class RecordPlayer_Stage3_v3 : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        nextLevelButton.SetActive(false);
         yMin = toneArmPivot.position.y;
         toneArmHead.toneArmPlayEvent.AddListener(playRecord);
         toneArmHead.toneArmPauseEvent.AddListener(pauseRecord);
@@ -76,14 +79,13 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
         print("play record0;");
         _audio.Play();
         disc.enabled = true;
-        //UnityEventTools.AddPersistentListener(lerpFinishEvent, beginStage4);
-        //UnityEventTools.AddPersistentListener(lerpUpdateEvent, beginStage4update);
-        //startTime = Time.time;
-        //IEnumerator finishingLevelCoroutine= lerpPosition(impactPoint, toneArmPlayTrigger.transform.position, debugSphere.transform);
-        //StartCoroutine(finishingLevelCoroutine);
-
-
+        if (!buttonReadyToShow)
+        {
+            StartCoroutine(enableNextLevelButton());
+        }
     }
+
+
 
     public void beginStage4update()
     {
@@ -94,6 +96,16 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     public void beginStage4()
     {
         levelManager.nextStage();
+    }
+
+    public GameObject nextLevelButton;
+    public float buttonWaitTime = 5;
+    public bool buttonReadyToShow = false; 
+    IEnumerator enableNextLevelButton()
+    {
+        buttonReadyToShow = true;
+        yield return new WaitForSeconds(buttonWaitTime);
+        nextLevelButton.SetActive(true);
     }
     //===============Helper Script=======================
 
