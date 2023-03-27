@@ -12,6 +12,7 @@ public class SkyColorManager : MonoBehaviour
     {
         levelManager = GetComponent<LevelManager>();
         levelManager.nextLevelEvent.AddListener(changeSkyColor);
+        changeSkyColor();
     }
 
     // Update is called once per frame

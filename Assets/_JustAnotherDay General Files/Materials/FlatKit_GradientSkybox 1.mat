@@ -24,10 +24,10 @@ Material:
     m_Floats:
     - _DirectionPitch: 0
     - _DirectionYaw: 0
-    - _Exponent: 0.94
-    - _Intensity: 2
+    - _Exponent: 1.08
+    - _Intensity: 1.99
     m_Colors:
-    - _Color1: {r: 0.007831959, g: 0.040155914, b: 0.18867922, a: 0}
-    - _Color2: {r: 0.082876444, g: 0.15158424, b: 0.4528302, a: 0}
+    - _Color1: {r: 0, g: 0, b: 0, a: 0}
+    - _Color2: {r: 1, g: 0, b: 0, a: 0}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
