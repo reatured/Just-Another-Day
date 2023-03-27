@@ -29,7 +29,8 @@ public class SkyColorManager : MonoBehaviour
     }
     float startTime;
     public float animationDuration;
-    public Material skyMaterial; 
+    public Material skyMaterial;
+    public Light directLight; 
     IEnumerator lerpSkyColor(Color start, Color end)
     {
         float journey = (Time.time - startTime) / animationDuration;
@@ -40,10 +41,12 @@ public class SkyColorManager : MonoBehaviour
             Color currentColor = Color.Lerp(start, end, journey);
             RenderSettings.ambientSkyColor = currentColor;
             skyMaterial.SetColor("_Color2", currentColor);
+            directLight.color = currentColor;
             yield return new WaitForFixedUpdate();
         }
 
         RenderSettings.ambientSkyColor = end;
+        directLight.color = end;
         skyMaterial.SetColor("_Color2", end);
 
 
