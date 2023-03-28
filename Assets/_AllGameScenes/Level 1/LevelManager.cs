@@ -12,7 +12,8 @@ public class LevelManager : MonoBehaviour
     public int totalStage;
     public int currentStage = 0;
 
-    public UnityEvent nextLevelEvent; 
+    public UnityEvent nextLevelEvent;
+    public UnityEvent setCamEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,11 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < stages.Length; i++)
         {
             stages[i].stageIndex = i + 1;
+        }
+
+        if (setCamEvent != null)
+        {
+            setCamEvent.Invoke();
         }
     }
     public Debug_CameraLerpNext camManager;
