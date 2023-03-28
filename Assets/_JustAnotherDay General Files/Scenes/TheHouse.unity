@@ -991,7 +991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &203844587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20376,14 +20376,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000016687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d668c51836d6a8b4082aa44b22f00524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
-  skyMaterial: {fileID: 0}
-  directLight: {fileID: 0}
+  skyMaterial: {fileID: 2100000, guid: 0780ab79cc5db9242bdcd22b94a0011b, type: 2}
+  directLight: {fileID: 203844588}
 --- !u!114 &2000016691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20405,7 +20405,7 @@ MonoBehaviour:
   levelManager: {fileID: 2000016689}
   animationDuration: 0
   skyMaterial: {fileID: 2100000, guid: 0780ab79cc5db9242bdcd22b94a0011b, type: 2}
-  directLight: {fileID: 0}
+  directLight: {fileID: 203844588}
 --- !u!114 &2011160563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2513097010346602536, guid: a4eb02b4279e3e04db89b47c4245663b,
