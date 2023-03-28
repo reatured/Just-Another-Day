@@ -991,7 +991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &203844587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20312,6 +20312,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2000016688}
   - component: {fileID: 2000016689}
+  - component: {fileID: 2000016691}
+  - component: {fileID: 2000016690}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -20367,6 +20369,43 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   camManager: {fileID: 866833}
+--- !u!114 &2000016690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000016687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d668c51836d6a8b4082aa44b22f00524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
+  skyMaterial: {fileID: 0}
+  directLight: {fileID: 0}
+--- !u!114 &2000016691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000016687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a78c32b1dc3ef04b95588d85e0c128e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0.7490196, g: 0.8627451, b: 1, a: 0}
+  - {r: 0.7411765, g: 0.8784314, b: 0.90588236, a: 0}
+  - {r: 0.8392157, g: 0.80784315, b: 0.70980394, a: 0}
+  - {r: 0.6509804, g: 0.5019608, b: 0.61960787, a: 0}
+  - {r: 0.14117648, g: 0.1254902, b: 0.24705882, a: 0}
+  levelManager: {fileID: 2000016689}
+  animationDuration: 0
+  skyMaterial: {fileID: 2100000, guid: 0780ab79cc5db9242bdcd22b94a0011b, type: 2}
+  directLight: {fileID: 0}
 --- !u!114 &2011160563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2513097010346602536, guid: a4eb02b4279e3e04db89b47c4245663b,
