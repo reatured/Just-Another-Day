@@ -28,6 +28,6 @@ Material:
     - _Intensity: 1.99
     m_Colors:
     - _Color1: {r: 0, g: 0, b: 0, a: 0}
-    - _Color2: {r: 1, g: 0, b: 0, a: 0}
+    - _Color2: {r: 0.12310428, g: 0.14978038, b: 0.26415092, a: 0}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
