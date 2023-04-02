@@ -73,6 +73,10 @@ public class LevelManager : MonoBehaviour
         {
             stages[stageIndex - 1].endStage();
         }
+        else
+        {
+            stages[^1].endStage();
+        }
 
     }
 
