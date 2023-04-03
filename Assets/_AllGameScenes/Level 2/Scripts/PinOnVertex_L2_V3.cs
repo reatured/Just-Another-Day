@@ -8,6 +8,7 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     public int index;
     public Vector3 vertPosition;
     public Vector3 vecOffset = Vector3.zero;
+    public float offsetMultiplier = 1f; 
 
     public Vector3 Pin
     {
@@ -28,6 +29,16 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
             transform.position = vertPosition + vecOffset;
 
         }
+    }
+
+    public void setOffset(PinOnVertex_L2_V3 target)
+    {
+        Vector3 offset = vertPosition - target.vertPosition;
+        print(offset.magnitude);
+        offset = offset.normalized * offsetMultiplier;
+        vecOffset = offset;
+        VertPosition = VertPosition;
+        print(gameObject.name + offset.ToString());
     }
 
 
@@ -53,7 +64,7 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     {
 
         float journey = (Time.time - startTime) / animationDuration;
-        //print("journey:" + journey);
+        print("journey:" + journey);
 
 
 
@@ -75,5 +86,15 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
         }
 
 
+    }
+
+    public void setColor(Color color)
+    {
+        material.color = color;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print(other.name);
     }
 }

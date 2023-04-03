@@ -27,6 +27,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
     private Vector3[] vertices;
 
     public float pin_animationDuration = 1f;
+    public float offsetMultiplier = 0.1f;
     public float TearLength
     {
         get { return tearLength; }
@@ -60,12 +61,13 @@ public class MeshManager_L2_V3 : MonoBehaviour
         totalLength = Vector3.Distance(head.position, tail.position);
         totalPins = pinsLeft.Length;//10
         CurrentPin = pinsLeft.Length;
+        setAnimationDuration(pin_animationDuration);
 
         if (alignToModel) initiateVariables();
 
         //attachPinsOnVertices();
-        setAnimationDuration(pin_animationDuration);
-        nextPin();
+        
+        //nextPin();
 
 
     }
@@ -76,6 +78,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         {
             PinOnVertex_L2_V3 pin = pinsLeft[i];
             pin.animationDuration = t;
+            pin.offsetMultiplier = offsetMultiplier;
         }
 
         for (int i = 0; i < pinsRight.Length; i++)
@@ -83,6 +86,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
 
             PinOnVertex_L2_V3 pin = pinsRight[i];
             pin.animationDuration = t;
+            pin.offsetMultiplier = offsetMultiplier;
         }
         animationDuration = t;
     }
@@ -94,6 +98,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         modelMesh = model.GetComponent<MeshFilter>().mesh;
         vertices = modelMesh.vertices;
 
+        //update pins in all pin script
         for (int i = 0; i < pinsLeft.Length; i++)
         {
             PinOnVertex_L2_V3 pin = pinsLeft[i];
@@ -107,12 +112,24 @@ public class MeshManager_L2_V3 : MonoBehaviour
             getClosestVertex(pin);
         }
 
+        //update vecOffset in each pin script
+        for (int i = 0; i < pinsLeft.Length; i++)
+        {
+            PinOnVertex_L2_V3 pinLeft = pinsLeft[i];
+            PinOnVertex_L2_V3 pinRight = pinsRight[i];
+            pinLeft.setOffset(pinRight);
+            pinRight.setOffset(pinLeft);
+
+
+        }
+
 
 
         //print(debugText);
     }
 
     //helper script for updating the closest vertex next to the pin in the *Pin Script*
+    //SHOULD only change the index in the *Pin Script
     public void getClosestVertex(PinOnVertex_L2_V3 pin)
     {
         float shortestDist = 1000;
@@ -128,8 +145,9 @@ public class MeshManager_L2_V3 : MonoBehaviour
             }
         }
         pin.index = shortestIndex;
+        pin.vertPosition = getVertPos(pin.index);
         //update pin's position as well;
-        pin.transform.position = getVertPos(pin.index);
+        //pin.transform.position = getVertPos(pin.index);
         debugText += pin.index + "\n";
     }
 
@@ -192,8 +210,6 @@ public class MeshManager_L2_V3 : MonoBehaviour
 
         }
 
-        print("lerp finished");
-
         if (lerpFinishEvent != null)
         {
             lerpFinishEvent.Invoke();
@@ -202,6 +218,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
     }
 
     //helper script for updating the position of pins on the both side. 
+   //GET RID OF THIS!!!
     public void pairPins(Transform left, Transform right, float percentile)
     {
 
