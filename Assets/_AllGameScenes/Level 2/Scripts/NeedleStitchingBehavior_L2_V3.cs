@@ -64,9 +64,6 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
         PinOnVertex_L2_V3 pin = pinsInOrder[currentPin];
         pin.GetComponent<Collider>().enabled = true;
         pin.setColor(Color.red);
-
-
-
     }
 
 
