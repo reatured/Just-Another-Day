@@ -9,7 +9,7 @@ using UnityEngine.Events;
 //C: center
 public class MeshManager_L2_V3 : MonoBehaviour
 {
-    public PinOnVertex_L2_V3[] pinsLeft, pinsRight;
+    public PinOnVertex_L2_V3[] pinsLeft, pinsRight, pinsInOrder;
     public Transform head;
     public Transform tail;
     public float tearLOverW = 10f;
@@ -25,7 +25,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
     public bool alignToModel = true;
     public GameObject model;
     public Mesh modelMesh;
-    public Vector3[] vertices;
+    private Vector3[] vertices;
 
     public float pin_animationDuration = 1f;
     public float TearLength
@@ -48,8 +48,6 @@ public class MeshManager_L2_V3 : MonoBehaviour
     }
     private int activePins;
     public AnimationCurve tearShape;
-    
-
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +70,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         
 
     }
-
+    //Set animation time duration for each pin
     public void setAnimationDuration(float t)
     {
         for (int i = 0; i < pinsLeft.Length; i++)
@@ -91,7 +89,8 @@ public class MeshManager_L2_V3 : MonoBehaviour
     }
 
     string debugText = "";
-    public void initiateVariables() //for align pins on the model. 
+    //for align pins on the model. 
+    public void initiateVariables() 
     {
         modelMesh = model.GetComponent<MeshFilter>().mesh;
         vertices = modelMesh.vertices;
@@ -112,7 +111,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         //print(debugText);
     }
 
-
+    //helper script for updating the closest vertex next to the pin in the *Pin Script*
     public void getClosestVertex(PinOnVertex_L2_V3 pin)
     {
         float shortestDist = 1000;
@@ -128,24 +127,24 @@ public class MeshManager_L2_V3 : MonoBehaviour
             }
         }
         pin.index = shortestIndex;
+        //update pin's position as well;
         pin.transform.position = getVertPos(pin.index);
         debugText += pin.index + "\n";
     }
 
+    //helper script for getting the position of the vertex
     public Vector3 getVertPos(int index)
     {
         return model.transform.TransformPoint((Vector3)vertices[index]);    
     }
 
+    //helper script for setting the position of the vertex.
     public void setVertPos(PinOnVertex_L2_V3 pin)
     {
-        vertices[pin.index] = model.transform.InverseTransformPoint(pin.transform.position);    
-    }
-    public void attachPinsOnVertices()
-    {
-
+        vertices[pin.index] = model.transform.InverseTransformPoint(pin.VertPosition);    
     }
 
+    //FUNCTION to be called when the next pin is stitched. 
     public void nextPin()
     {
         CurrentPin--; //activePins = this+1
@@ -165,6 +164,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
 
     }
 
+    //helper script for animating the stitching of each pin. 
     float startTime;
     float animationDuration;
     public UnityEvent lerpFinishEvent;
@@ -201,6 +201,8 @@ public class MeshManager_L2_V3 : MonoBehaviour
             }
         }
     }
+
+    //helper script for updating the position of pins on the both side. 
     public void pairPins(Transform left, Transform right, float percentile)
     {
 

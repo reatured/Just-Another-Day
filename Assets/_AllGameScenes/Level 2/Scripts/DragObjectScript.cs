@@ -11,7 +11,7 @@ public class DragObjectScript : MonoBehaviour
     private void Start()
     {
         pinBehavior = GetComponent<PinOnVertex_L2_V3>();
-        dragEvent.AddListener(pinBehavior.updatePosOnMesh);
+
     }
     void OnMouseDown()
     {

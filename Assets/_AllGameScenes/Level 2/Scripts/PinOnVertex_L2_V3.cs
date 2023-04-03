@@ -8,7 +8,8 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
 {
     private Material material;
     public int index;
-    public Vector3 vertPosition; 
+    public Vector3 vertPosition;
+    public Vector3 vecOffset = Vector3.zero;
 
     public Vector3 Pin
     {
@@ -19,29 +20,21 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
         }
     }
 
+    public Vector3 VertPosition { 
+        get { return vertPosition; } 
+        set {
+            vertPosition = value;
+            transform.position = vertPosition + vecOffset;
+        
+        }
+    }
+
 
     // Start is called before the first frame update
     private void Awake()
     {
         material = GetComponent<MeshRenderer>().material;
         material.color = Color.black;
-    }
-    void Start()
-    {
-        
-        
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void updatePosOnMesh()
-    {
-        
     }
 
     public void lerpTowards(Vector3 end)
