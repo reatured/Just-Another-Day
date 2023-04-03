@@ -49,20 +49,15 @@ public class Debug_CameraLerpNext : MonoBehaviour
     IEnumerator animateLerp()
     {
         float journey = (Time.time - startTime) / lerpDuration;
-        mainCam.position = Vector3.Lerp(startPos, endPos, journey);
-        mainCam.rotation = Quaternion.Lerp(startQua, endQua, journey);
-        
 
+        while (journey < 1)
+        {
+            mainCam.position = Vector3.Lerp(startPos, endPos, journey);
+            mainCam.rotation = Quaternion.Lerp(startQua, endQua, journey);
+            yield return new WaitForFixedUpdate();
+            journey = (Time.time - startTime) / lerpDuration;
+        }
 
-        yield return new WaitForFixedUpdate();
-        if (journey < 1)
-        {
-            StartCoroutine(animateLerp());
-        }
-        else
-        {
-            
-        }
         
     }
 }

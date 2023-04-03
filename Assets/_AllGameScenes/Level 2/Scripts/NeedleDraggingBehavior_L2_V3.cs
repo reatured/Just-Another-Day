@@ -33,7 +33,7 @@ public class NeedleDraggingBehavior_L2_V3 : MonoBehaviour
         Vector3 vecTONeedle = transform.position - bearModel.transform.position;
         float dotProduct = Vector3.Dot(vecTONeedle, vecCamToBear);
         dotProduct = map(dotProduct, -0.4f * tiltingMultiplier, 0.4f * tiltingMultiplier, 0, 1);
-        print(dotProduct);
+        //print(dotProduct);
         transform.rotation = Quaternion.LerpUnclamped(trans_tiltingLeft.rotation, trans_tiltingRight.rotation, dotProduct);
     }
 

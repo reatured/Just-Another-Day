@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,18 +12,21 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     public Vector3 Pin
     {
         get { return transform.position; }
-        set {
+        set
+        {
             transform.position = value;
             print("updateTransform");
         }
     }
 
-    public Vector3 VertPosition { 
-        get { return vertPosition; } 
-        set {
+    public Vector3 VertPosition
+    {
+        get { return vertPosition; }
+        set
+        {
             vertPosition = value;
             transform.position = vertPosition + vecOffset;
-        
+
         }
     }
 
@@ -53,26 +54,26 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
 
         float journey = (Time.time - startTime) / animationDuration;
         //print("journey:" + journey);
-        
-        movingTrans.position = Vector3.Lerp(start, end, journey);
-        vertPosition = movingTrans.position;
-        material.color = new Color(journey, journey, 0);
-        yield return new WaitForFixedUpdate();
 
-        journey = (Time.time - startTime) / animationDuration;
-        if (journey < 1)
+
+
+
+        while (journey < 1)
         {
-            StartCoroutine(lerpPosition(start, end, movingTrans));
+            movingTrans.position = Vector3.Lerp(start, end, journey);
+            vertPosition = movingTrans.position;
+            material.color = new Color(journey, journey, 0);
+            yield return new WaitForFixedUpdate();
+            journey = (Time.time - startTime) / animationDuration;
         }
-        else
+
+        //print(movingTrans.position);
+        movingTrans.position = end;
+        if (lerpFinishEvent != null)
         {
-            //print(movingTrans.position);
-            movingTrans.position = end;
-            if (lerpFinishEvent != null)
-            {
-                lerpFinishEvent.Invoke();
-            }
+            lerpFinishEvent.Invoke();
         }
+
 
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 //      /0-1-2-3-C-5-6-7-8-c\           :pins orders        || center || pins orders, current = 9
@@ -57,7 +56,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
             print("uneven pins");
         }
 
-        
+
         totalLength = Vector3.Distance(head.position, tail.position);
         totalPins = pinsLeft.Length;//10
         CurrentPin = pinsLeft.Length;
@@ -67,7 +66,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         //attachPinsOnVertices();
         setAnimationDuration(pin_animationDuration);
         nextPin();
-        
+
 
     }
     //Set animation time duration for each pin
@@ -85,12 +84,12 @@ public class MeshManager_L2_V3 : MonoBehaviour
             PinOnVertex_L2_V3 pin = pinsRight[i];
             pin.animationDuration = t;
         }
-        animationDuration = t; 
+        animationDuration = t;
     }
 
     string debugText = "";
     //for align pins on the model. 
-    public void initiateVariables() 
+    public void initiateVariables()
     {
         modelMesh = model.GetComponent<MeshFilter>().mesh;
         vertices = modelMesh.vertices;
@@ -107,6 +106,8 @@ public class MeshManager_L2_V3 : MonoBehaviour
             PinOnVertex_L2_V3 pin = pinsRight[i];
             getClosestVertex(pin);
         }
+
+
 
         //print(debugText);
     }
@@ -135,13 +136,14 @@ public class MeshManager_L2_V3 : MonoBehaviour
     //helper script for getting the position of the vertex
     public Vector3 getVertPos(int index)
     {
-        return model.transform.TransformPoint((Vector3)vertices[index]);    
+        return model.transform.TransformPoint((Vector3)vertices[index]);
     }
 
     //helper script for setting the position of the vertex.
     public void setVertPos(PinOnVertex_L2_V3 pin)
     {
-        vertices[pin.index] = model.transform.InverseTransformPoint(pin.VertPosition);    
+        vertices[pin.index] = model.transform.InverseTransformPoint(pin.VertPosition);
+
     }
 
     //FUNCTION to be called when the next pin is stitched. 
@@ -150,7 +152,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
         CurrentPin--; //activePins = this+1
         TearLength = 1f * activePins / totalPins * totalLength;//(9+1)/10
         //pair pins;
-        for (int i = 0; i < activePins; i++)
+        for (int i = 0; i < activePins; i++)//activePins is causing the coroutine to stop when clicking too fast. 
         {
             pairPins(pinsLeft[i].transform, pinsRight[i].transform, (i + 1) * 1f / (activePins + 1));//currentPin = 9
         }
@@ -171,35 +173,32 @@ public class MeshManager_L2_V3 : MonoBehaviour
     IEnumerator stitchingTheTear()
     {
         float journey = (Time.time - startTime) / animationDuration;
-        for(int i = 0;i < activePins;i++)
+        while (journey <= 1)
         {
-            setVertPos(pinsLeft[i]);
-            setVertPos(pinsRight[i]);
-
-        }
-        if (activePins < totalPins) // Stitches the previous pair pins.
-        {
-            setVertPos(pinsLeft[activePins]);
-            setVertPos(pinsRight[activePins]);
-        }
-
-        modelMesh.vertices = vertices;
-
-
-        yield return new WaitForFixedUpdate();
-        journey = (Time.time - startTime) / animationDuration;
-        if (journey <= 1)
-        {
-            StartCoroutine(stitchingTheTear());
-        }
-        else
-        {
-
-            if (lerpFinishEvent != null)
+            for (int i = 0; i < activePins; i++)
             {
-                lerpFinishEvent.Invoke();
+                setVertPos(pinsLeft[i]);
+                setVertPos(pinsRight[i]);
+
             }
+            if (activePins < totalPins) // Stitches the previous pair pins.
+            {
+                setVertPos(pinsLeft[activePins]);
+                setVertPos(pinsRight[activePins]);
+            }
+            modelMesh.vertices = vertices;
+            yield return new WaitForFixedUpdate();
+            journey = (Time.time - startTime) / animationDuration;
+
         }
+
+        print("lerp finished");
+
+        if (lerpFinishEvent != null)
+        {
+            lerpFinishEvent.Invoke();
+        }
+
     }
 
     //helper script for updating the position of pins on the both side. 
