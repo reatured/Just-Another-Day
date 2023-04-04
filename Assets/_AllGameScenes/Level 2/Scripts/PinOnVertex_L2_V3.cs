@@ -76,7 +76,7 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
         {
             movingTrans.position = Vector3.Lerp(start, end, journey);
             vertPosition = movingTrans.position;
-            material.color = new Color(journey, journey, 0);
+            //material.color = new Color(journey, journey, 0);
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / animationDuration;
         }
@@ -102,6 +102,7 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
         if(other.name == "Needle1")
         {
             pinSelected = true;
+            needleScript = other.GetComponent<NeedleStitchingBehavior_L2_V3>(); 
         }
     }
 
@@ -113,13 +114,17 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
         }
     }
 
+    private bool isStitched = false;
+    private NeedleStitchingBehavior_L2_V3 needleScript;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (pinSelected)
+            if (pinSelected && !isStitched)
             {
                 meshManager.nextPin();
+                isStitched=true;
+                needleScript.stitchTheHole();
             }
         }
         

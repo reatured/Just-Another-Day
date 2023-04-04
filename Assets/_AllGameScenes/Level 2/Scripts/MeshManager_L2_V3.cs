@@ -66,8 +66,8 @@ public class MeshManager_L2_V3 : MonoBehaviour
         if (alignToModel) initiateVariables();
 
         //attachPinsOnVertices();
-        
-        //nextPin();
+
+        nextPin();
 
 
     }
