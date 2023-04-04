@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_JustAnotherDay General Files/Scenes/Menu Scene.unity
+    guid: dc4664b746b1a554bbf0550e8f4c3b0a
+  - enabled: 1
     path: Assets/_JustAnotherDay General Files/Scenes/TheHouse.unity
     guid: 9d843f55f45d3ea4d84eb9fdbbad8bb2
   m_configObjects: {}
