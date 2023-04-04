@@ -21,9 +21,6 @@ public class NeedleDraggingBehavior_L2_V3 : MonoBehaviour
     {
         transform.position = getImpactPoint();
         getRotation(); 
-
-        
-
     }
 
     public void getRotation()

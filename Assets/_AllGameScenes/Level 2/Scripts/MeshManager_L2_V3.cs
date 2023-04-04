@@ -79,6 +79,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
             PinOnVertex_L2_V3 pin = pinsLeft[i];
             pin.animationDuration = t;
             pin.offsetMultiplier = offsetMultiplier;
+            pin.meshManager = this; 
         }
 
         for (int i = 0; i < pinsRight.Length; i++)
@@ -87,6 +88,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
             PinOnVertex_L2_V3 pin = pinsRight[i];
             pin.animationDuration = t;
             pin.offsetMultiplier = offsetMultiplier;
+            pin.meshManager = this;
         }
         animationDuration = t;
     }

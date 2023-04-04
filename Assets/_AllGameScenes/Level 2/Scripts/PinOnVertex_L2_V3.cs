@@ -8,8 +8,11 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     public int index;
     public Vector3 vertPosition;
     public Vector3 vecOffset = Vector3.zero;
-    public float offsetMultiplier = 1f; 
+    public float offsetMultiplier = 1f;
 
+    public bool pinSelected = false;
+
+    public MeshManager_L2_V3 meshManager; 
     public Vector3 Pin
     {
         get { return transform.position; }
@@ -96,5 +99,30 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print(other.name);
+        if(other.name == "Needle1")
+        {
+            pinSelected = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Needle1")
+        {
+            pinSelected = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (pinSelected)
+            {
+                meshManager.nextPin();
+            }
+        }
+        
     }
 }
+
