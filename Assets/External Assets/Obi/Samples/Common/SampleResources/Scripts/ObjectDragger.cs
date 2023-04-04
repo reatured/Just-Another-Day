@@ -18,4 +18,6 @@ public class ObjectDragger : MonoBehaviour
 		Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 		transform.position = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
 	}
+
+ 
  }
