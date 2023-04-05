@@ -6127,6 +6127,11 @@ PrefabInstance:
       propertyPath: fadeIn
       value: 
       objectReference: {fileID: 77589281}
+    - target: {fileID: 7915963878549114779, guid: 3b92f0a44a3ac83408ef1fce974995b2,
+        type: 3}
+      propertyPath: lerpDuration
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b92f0a44a3ac83408ef1fce974995b2, type: 3}
 --- !u!1 &1019761912

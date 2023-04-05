@@ -41,7 +41,7 @@ public class Debug_CameraLerpNext : MonoBehaviour
     }
 
     float startTime = 0f;
-    public float lerpDuration = 1f;
+    public float lerpDuration = 0.1f;
     
     public void lerpCam()
     {
@@ -60,6 +60,8 @@ public class Debug_CameraLerpNext : MonoBehaviour
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / lerpDuration;
         }
+        mainCam.position = endPos;
+        mainCam.rotation = endQua;
 
         fadeIn.fadeInScene();
         
