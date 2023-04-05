@@ -505,7 +505,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackImage: {fileID: 1764505074}
-  animationDuration: 0.8
+  levelManager: {fileID: 2000016689}
+  animationDuration: 1
+  fadingEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  camScript: {fileID: 866833}
 --- !u!1 &90506531
 GameObject:
   m_ObjectHideFlags: 0
@@ -6047,6 +6052,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7915963878549114776, guid: 3b92f0a44a3ac83408ef1fce974995b2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2000016689}
+    - target: {fileID: 7915963878549114776, guid: 3b92f0a44a3ac83408ef1fce974995b2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: nextStage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7915963878549114776, guid: 3b92f0a44a3ac83408ef1fce974995b2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7915963878549114777, guid: 3b92f0a44a3ac83408ef1fce974995b2,
         type: 3}
       propertyPath: m_Color.b
@@ -6102,6 +6122,11 @@ PrefabInstance:
       propertyPath: lm
       value: 
       objectReference: {fileID: 2000016689}
+    - target: {fileID: 7915963878549114779, guid: 3b92f0a44a3ac83408ef1fce974995b2,
+        type: 3}
+      propertyPath: fadeIn
+      value: 
+      objectReference: {fileID: 77589281}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b92f0a44a3ac83408ef1fce974995b2, type: 3}
 --- !u!1 &1019761912
@@ -20088,6 +20113,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  script_CrossFade: {fileID: 77589281}
   camManager: {fileID: 866833}
 --- !u!114 &2000016690
 MonoBehaviour:
@@ -25312,6 +25338,7 @@ MonoBehaviour:
   setCamEvent:
     m_PersistentCalls:
       m_Calls: []
+  script_CrossFade: {fileID: 0}
   camManager: {fileID: 0}
 --- !u!4 &6493262780199079003
 Transform:
