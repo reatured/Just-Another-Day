@@ -13,6 +13,6 @@ public class UI_NextLevel_L1 : MonoBehaviour
     public void nextLevel()
     {
 
-        camManager.goToNextCam();
+        lm.nextStage(); 
     }
 }

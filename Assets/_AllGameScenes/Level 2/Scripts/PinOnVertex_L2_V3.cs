@@ -37,11 +37,11 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     public void setOffset(PinOnVertex_L2_V3 target)
     {
         Vector3 offset = vertPosition - target.vertPosition;
-        print(offset.magnitude);
+
         offset = offset.normalized * offsetMultiplier;
         vecOffset = offset;
         VertPosition = VertPosition;
-        print(gameObject.name + offset.ToString());
+
     }
 
 
@@ -67,10 +67,6 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
     {
 
         float journey = (Time.time - startTime) / animationDuration;
-        print("journey:" + journey);
-
-
-
 
         while (journey < 1)
         {

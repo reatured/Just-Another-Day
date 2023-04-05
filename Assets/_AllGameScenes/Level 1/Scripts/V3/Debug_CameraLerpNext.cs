@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Debug_CameraLerpNext : MonoBehaviour
 {
     public Transform mainCam; 
     public Transform[] cams;
     public int currentCam = 0;
+    public Scene_FadeIn fadeIn; 
     public int CurrentCam
     {
         get { return currentCam; }   // get method
@@ -35,11 +37,12 @@ public class Debug_CameraLerpNext : MonoBehaviour
 
     public void goToNextCam()
     {
-        lm.nextStage();
         CurrentCam++;
     }
+
     float startTime = 0f;
     public float lerpDuration = 1f;
+    
     public void lerpCam()
     {
         startTime = Time.time;
@@ -58,6 +61,7 @@ public class Debug_CameraLerpNext : MonoBehaviour
             journey = (Time.time - startTime) / lerpDuration;
         }
 
+        fadeIn.fadeInScene();
         
     }
 }

@@ -14,7 +14,22 @@ public class LevelManager : MonoBehaviour
 
     public UnityEvent nextLevelEvent;
     public UnityEvent setCamEvent;
-    // Start is called before the first frame update
+
+    public Scene_FadeIn script_CrossFade;
+
+    //Only Call nextStage Function
+    public void nextStage()
+    {
+        currentStage++;
+        if (currentStage > totalStage)
+        {
+            currentStage = 1;
+        }
+
+        script_CrossFade.fadeOutScene();
+    }
+
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -29,6 +44,7 @@ public class LevelManager : MonoBehaviour
         if (setCamEvent != null)
         {
             setCamEvent.Invoke();
+
         }
     }
     public Debug_CameraLerpNext camManager;
@@ -38,15 +54,8 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public void nextStage()
+    public void goToStage()
     {
-        currentStage++;
-        if (currentStage > totalStage)
-        {
-            currentStage = 1;
-        }
-
-
         goToStage(currentStage);
     }
 
@@ -120,8 +129,6 @@ public class LevelManager : MonoBehaviour
             stages[stageIndex - 1].endStage();
         }
     }
-
-
 }
 
 

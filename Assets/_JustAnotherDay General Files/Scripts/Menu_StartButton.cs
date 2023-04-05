@@ -31,7 +31,7 @@ public class Menu_StartButton : MonoBehaviour
     IEnumerator endScene(Color start, Color end)
     {
         float journey = (Time.time - startTime) / animationDuration;
-        while (journey < 1)
+        while (journey < 1.1f)
         {
 
             blackImage.color = Color.Lerp(start, end, journey);

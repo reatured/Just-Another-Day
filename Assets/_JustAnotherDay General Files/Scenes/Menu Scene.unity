@@ -1441,4 +1441,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 0}
   blackImage: {fileID: 803733739}
-  animationDuration: 0.8
+  animationDuration: 1

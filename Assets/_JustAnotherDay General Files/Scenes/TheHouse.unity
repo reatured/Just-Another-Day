@@ -402,8 +402,9 @@ GameObject:
   - component: {fileID: 77589279}
   - component: {fileID: 77589278}
   - component: {fileID: 77589277}
+  - component: {fileID: 77589281}
   m_Layer: 5
-  m_Name: Final Canvas
+  m_Name: Cross Fade Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,6 +492,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &77589281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77589276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f3f11c82e51fb4e8db27f3b7bf9234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackImage: {fileID: 1764505074}
+  animationDuration: 0.8
 --- !u!1 &90506531
 GameObject:
   m_ObjectHideFlags: 0
@@ -17106,14 +17121,13 @@ GameObject:
   - component: {fileID: 1764505075}
   - component: {fileID: 1764505074}
   - component: {fileID: 1764505073}
-  - component: {fileID: 1764505076}
   m_Layer: 5
   m_Name: BlackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1764505072
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17184,20 +17198,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764505071}
   m_CullTransparentMesh: 1
---- !u!114 &1764505076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764505071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f3f11c82e51fb4e8db27f3b7bf9234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackImage: {fileID: 1764505074}
-  animationDuration: 0.8
 --- !u!1 &1779970850
 GameObject:
   m_ObjectHideFlags: 0
