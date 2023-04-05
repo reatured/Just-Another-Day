@@ -105,7 +105,7 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     {
         buttonReadyToShow = true;
         yield return new WaitForSeconds(buttonWaitTime);
-        nextLevelButton.SetActive(true);
+        levelManager.nextStage();
     }
     //===============Helper Script=======================
 

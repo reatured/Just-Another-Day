@@ -25,8 +25,16 @@ public class LevelManager : MonoBehaviour
         {
             currentStage = 1;
         }
-
-        script_CrossFade.fadeOutScene();
+        
+        if(script_CrossFade != null)
+        {
+            script_CrossFade.fadeOutScene();
+        }
+        else
+        {
+            goToStage();
+        }
+        
     }
 
 

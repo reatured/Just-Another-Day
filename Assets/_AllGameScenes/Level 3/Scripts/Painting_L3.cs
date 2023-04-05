@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Painting_L3 : MonoBehaviour
@@ -20,9 +21,9 @@ public class Painting_L3 : MonoBehaviour
 
     public ColorBlock[] blocks = new ColorBlock[6];
     public int[] CorrectColorOrder;
-    public int currentBrushColorIndex = 0; 
+    public int currentBrushColorIndex = 0;
 
-
+    public LevelManager lm; 
     public BrushBehavior_L3 brushBehavior;
     public bool PickedUp
     {
@@ -106,9 +107,18 @@ public class Painting_L3 : MonoBehaviour
         if(checkingResult )
         {
             print("Done");
-            PickedUp = true;
-            brushBehavior.PickedUp = false;
+            PickedUp = true; //pickup the paper to the pick up transform
+            brushBehavior.PickedUp = false; //put down brush.
+            StartCoroutine(nextLevel());
         }
+    }
+
+    IEnumerator nextLevel()
+    {
+        
+        yield return new WaitForSeconds(1);
+        PickedUp = false;
+        lm.nextStage();
     }
 
     public Color brushColor; 

@@ -80,6 +80,7 @@ public class DiscSnappingManager : MonoBehaviour
 
 
 
-        levelManager.nextStageAfterSeconds(1f);
+        //levelManager.nextStageAfterSeconds(1f);
+        levelManager.nextStage();
     }
 }
