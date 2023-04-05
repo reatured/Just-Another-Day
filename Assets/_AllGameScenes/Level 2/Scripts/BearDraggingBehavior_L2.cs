@@ -24,6 +24,7 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
 
     private void OnMouseDown()
     {
+        print("clicked");
         if (coroutine != null)
         {
             StopAllCoroutines();
@@ -71,18 +72,17 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
         
         journey = (Time.time - startTime) / animationDuration;
         
-        movingTrans.position = Vector3.Lerp(start, end, journey);
+        
         //print("running" + Vector3.Lerp(start.position, end.position, journey) + "\nJourney" + journey);
 
-        yield return new WaitForFixedUpdate();
-
-        journey = (Time.time - startTime) / animationDuration;
-        if (journey < 1)
+        
+        while (journey < 1.1f)
         {
-            StartCoroutine(lerpPosition(start, end, movingTrans));
+            movingTrans.position = Vector3.Lerp(start, end, journey);
+            yield return new WaitForFixedUpdate();
+            journey = (Time.time - startTime) / animationDuration;
         }
-        else
-        {
+
             print(movingTrans.position);
             movingTrans.position = end;
 
@@ -90,8 +90,6 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
             {
                 lerpFinishEvent.Invoke();
             }
-        }
-
     }
 
     IEnumerator lerpRotation(Quaternion start, Quaternion end, Transform movingTrans)
