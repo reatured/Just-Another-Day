@@ -65,7 +65,8 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
         pin.setColor(Color.red);
     }
 
-    public Transform stitchingCollider; 
+    public Transform stitchingCollider;
+    public Transform lookAtTrans; 
     public void stitchTheHole()
     {
         PinOnVertex_L2_V3 pin = pinsInOrder[currentPin];
@@ -76,5 +77,6 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
         pin.GetComponent<Collider>().enabled = true;
         pin.setColor(Color.red);
         stitchingCollider.position = pin.transform.position; 
+        stitchingCollider.transform.LookAt(lookAtTrans);
     }
 }

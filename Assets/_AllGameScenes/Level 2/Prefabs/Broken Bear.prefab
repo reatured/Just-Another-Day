@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 3610419665656995729}
   - component: {fileID: 1203003615474006533}
   m_Layer: 0
-  m_Name: Sphere.011
+  m_Name: Eye Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,40 +370,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 147348669722810844}
     m_Modifications:
-    - target: {fileID: 2498883327479053456, guid: deda74d4b0271374aaaf46d3841017cf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.03452815
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498883327479053456, guid: deda74d4b0271374aaaf46d3841017cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.45130163
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498883327479053456, guid: deda74d4b0271374aaaf46d3841017cf,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.14989272
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498883327479053460, guid: deda74d4b0271374aaaf46d3841017cf,
-        type: 3}
-      propertyPath: index
-      value: 5799
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498883327479053460, guid: deda74d4b0271374aaaf46d3841017cf,
-        type: 3}
-      propertyPath: animationDuration
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498883327841544944, guid: deda74d4b0271374aaaf46d3841017cf,
+    - target: {fileID: 2498883328133389578, guid: deda74d4b0271374aaaf46d3841017cf,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498883328453695018, guid: deda74d4b0271374aaaf46d3841017cf,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2498883328984365465, guid: deda74d4b0271374aaaf46d3841017cf,
         type: 3}

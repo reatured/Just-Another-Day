@@ -32,7 +32,7 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
         }
         animationDuration = animationDurationMax * journey;
         animationDuration = Mathf.Min(animationDuration, animationDurationMax);
-        print("animation duration: " + animationDuration);
+
         startTime = Time.time;
         journey = 0;
         if (!pickedUp)
@@ -49,13 +49,8 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
             coroutine = lerpPosition(movingObjTrans.position, restTransform.position, movingObjTrans);
             pickedUp = false;
         }
-        
-        
+
         StartCoroutine(coroutine);  
-
-
-
-
     }
 
 
