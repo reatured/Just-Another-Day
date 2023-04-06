@@ -74,7 +74,7 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
         if(stage > 3)
         {
             potAnimator = pot.GetComponent<Animator>();
-            potAnimator.SetTrigger("Pour");
+            //potAnimator.SetTrigger("Pour");
             lm.nextStageAfterSeconds(2f);
         }
         

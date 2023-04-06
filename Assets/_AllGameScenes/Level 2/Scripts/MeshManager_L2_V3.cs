@@ -39,7 +39,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
             tearWidth = tearLength / tearLOverW;
         }
     }
-
+    public BearDraggingBehavior_L2 bearDrag; 
 
     public int CurrentPin
     {
