@@ -30,6 +30,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
     public float offsetMultiplier = 0.1f;
 
     public LevelManager gameManager;
+    public LevelManager levelManager;
     public float TearLength
     {
         get { return tearLength; }
@@ -50,9 +51,11 @@ public class MeshManager_L2_V3 : MonoBehaviour
             activePins = value + 1;
             if (currentPin == 0)
             {
+                
                 if (gameManager == null) return;
                 Cursor.visible = true;
-                gameManager.nextStageAfterSeconds(1f);
+                gameManager.nextStageAfterSeconds(3f);
+                
 
 
             }

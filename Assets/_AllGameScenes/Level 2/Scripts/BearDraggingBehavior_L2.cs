@@ -28,6 +28,11 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
 
     private void OnMouseDown()
     {
+        pickUpAndPutDown();
+    }
+
+    public void pickUpAndPutDown()
+    {
         if (coroutine != null)
         {
             StopAllCoroutines();
@@ -49,14 +54,15 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
         }
         else
         {
-            
+
             coroutine = lerpRotation(movingObjTrans.rotation, restTransform.rotation, movingObjTrans);
+
             StartCoroutine(coroutine);
             coroutine = lerpPosition(movingObjTrans.position, restTransform.position, movingObjTrans);
             pickedUp = false;
         }
 
-        StartCoroutine(coroutine);  
+        StartCoroutine(coroutine);
     }
 
 
