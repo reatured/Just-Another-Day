@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     //Only Call nextStage Function
     public void nextStage()
     {
+        
         currentStage++;
         if (currentStage > totalStage)
         {
@@ -41,6 +42,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        Cursor.visible = true;
         totalStage = stages.Length;
         currentStage = startFromStage;
         goToStage(currentStage);
