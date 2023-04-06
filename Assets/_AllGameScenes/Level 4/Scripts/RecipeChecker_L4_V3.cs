@@ -10,7 +10,9 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
     public FoodPickUp_L4_V3 foodToBeAdd;
 
     public int stage = 0;
-    public Color originalColor; 
+    public Color originalColor;
+
+    public LevelManager lm; 
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,7 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
         {
             potAnimator = pot.GetComponent<Animator>();
             potAnimator.SetTrigger("Pour");
+            lm.nextStageAfterSeconds(2f);
         }
         
     }

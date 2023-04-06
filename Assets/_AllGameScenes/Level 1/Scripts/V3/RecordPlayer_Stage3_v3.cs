@@ -24,7 +24,7 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
     void Start()
     {
 
-        nextLevelButton.SetActive(false);
+        //nextLevelButton.SetActive(false);
         yMin = toneArmPivot.position.y;
         toneArmHead.toneArmPlayEvent.AddListener(playRecord);
         toneArmHead.toneArmPauseEvent.AddListener(pauseRecord);

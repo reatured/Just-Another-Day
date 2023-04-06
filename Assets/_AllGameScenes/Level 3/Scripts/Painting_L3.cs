@@ -47,6 +47,7 @@ public class Painting_L3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
         for(int i = 0; i < blocks.Length; i++)
         {
             blocks[i] = new ColorBlock(CorrectColorOrder[i]); //0~5

@@ -41,8 +41,8 @@ public class FoodPickUp_L4_V3 : MonoBehaviour
     private void OnMouseUp()
     {
         Cursor.visible = true;
-        GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<Rigidbody>().useGravity = true;
+        //GetComponent<Rigidbody>().isKinematic = false;
+        //GetComponent<Rigidbody>().useGravity = true;
 
         if (mouseUpEvent != null)
         {
@@ -72,6 +72,7 @@ public class FoodPickUp_L4_V3 : MonoBehaviour
     {
 
         transform.position = originalPos;
+        
     }
 
     public void addToPot()
