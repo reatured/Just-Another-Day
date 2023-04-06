@@ -9,7 +9,7 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
     public List<PinOnVertex_L2_V3> pinsInOrder;
     public int activePinLeft = 0, activePinRight = 0;
 
-    int currentPin = 1;
+    public int currentPin = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +63,8 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
         PinOnVertex_L2_V3 pin = pinsInOrder[currentPin];
         pin.GetComponent<Collider>().enabled = true;
         pin.setColor(Color.red);
+
+        alignColliderSurface();
     }
 
     public Transform stitchingCollider;
@@ -76,7 +78,17 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
         pin = pinsInOrder[currentPin];
         pin.GetComponent<Collider>().enabled = true;
         pin.setColor(Color.red);
-        stitchingCollider.position = pin.transform.position; 
+
+        alignColliderSurface();
+
+
+    }
+
+    public void alignColliderSurface()
+    {
+        print("aligning");
+        PinOnVertex_L2_V3 pin = pinsInOrder[currentPin];
+        stitchingCollider.position = pin.transform.position;
         stitchingCollider.transform.LookAt(lookAtTrans);
     }
 }

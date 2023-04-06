@@ -10,6 +10,10 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
     public Transform movingObjTrans;
     bool pickedUp = false;
     IEnumerator coroutine;
+
+    public LevelManager level2Manager;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,7 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
         journey = 0;
         if (!pickedUp)
         {
+
             coroutine = lerpRotation(movingObjTrans.rotation, pickUpTransform.rotation, movingObjTrans);
             StartCoroutine(coroutine);
             coroutine = lerpPosition(movingObjTrans.position, pickUpTransform.position, movingObjTrans);
@@ -44,6 +49,7 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
         }
         else
         {
+            
             coroutine = lerpRotation(movingObjTrans.rotation, restTransform.rotation, movingObjTrans);
             StartCoroutine(coroutine);
             coroutine = lerpPosition(movingObjTrans.position, restTransform.position, movingObjTrans);
@@ -63,30 +69,28 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
     float journey = 1;
     IEnumerator lerpPosition(Vector3 start, Vector3 end, Transform movingTrans)
     {
-        
+
         journey = (Time.time - startTime) / animationDuration;
-        
-        movingTrans.position = Vector3.Lerp(start, end, journey);
+
+
         //print("running" + Vector3.Lerp(start.position, end.position, journey) + "\nJourney" + journey);
 
-        yield return new WaitForFixedUpdate();
 
-        journey = (Time.time - startTime) / animationDuration;
-        if (journey < 1)
+        while (journey < 1.1f)
         {
-            StartCoroutine(lerpPosition(start, end, movingTrans));
-        }
-        else
-        {
-            print(movingTrans.position);
-            movingTrans.position = end;
-
-            if (lerpFinishEvent != null)
-            {
-                lerpFinishEvent.Invoke();
-            }
+            movingTrans.position = Vector3.Lerp(start, end, journey);
+            yield return new WaitForFixedUpdate();
+            journey = (Time.time - startTime) / animationDuration;
         }
 
+        print(movingTrans.position);
+        movingTrans.position = end;
+
+        if (lerpFinishEvent != null)
+        {
+            lerpFinishEvent.Invoke();
+
+        }
     }
 
     IEnumerator lerpRotation(Quaternion start, Quaternion end, Transform movingTrans)
@@ -108,10 +112,6 @@ public class BearDraggingBehavior_L2 : MonoBehaviour
         {
             print(movingTrans.position);
             movingTrans.rotation = end;
-            if (lerpFinishEvent != null)
-            {
-                lerpFinishEvent.Invoke();
-            }
         }
     }
 

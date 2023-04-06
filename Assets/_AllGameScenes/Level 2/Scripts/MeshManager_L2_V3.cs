@@ -28,6 +28,8 @@ public class MeshManager_L2_V3 : MonoBehaviour
 
     public float pin_animationDuration = 1f;
     public float offsetMultiplier = 0.1f;
+
+    public LevelManager gameManager;
     public float TearLength
     {
         get { return tearLength; }
@@ -37,6 +39,8 @@ public class MeshManager_L2_V3 : MonoBehaviour
             tearWidth = tearLength / tearLOverW;
         }
     }
+
+
     public int CurrentPin
     {
         get { return currentPin; }
@@ -44,6 +48,14 @@ public class MeshManager_L2_V3 : MonoBehaviour
         {
             currentPin = value;
             activePins = value + 1;
+            if (currentPin == 0)
+            {
+                if (gameManager == null) return;
+                Cursor.visible = true;
+                gameManager.nextStageAfterSeconds(1f);
+
+
+            }
         }
     }
     private int activePins;
@@ -79,7 +91,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
             PinOnVertex_L2_V3 pin = pinsLeft[i];
             pin.animationDuration = t;
             pin.offsetMultiplier = offsetMultiplier;
-            pin.meshManager = this; 
+            pin.meshManager = this;
         }
 
         for (int i = 0; i < pinsRight.Length; i++)
@@ -220,7 +232,7 @@ public class MeshManager_L2_V3 : MonoBehaviour
     }
 
     //helper script for updating the position of pins on the both side. 
-   //GET RID OF THIS!!!
+    //GET RID OF THIS!!!
     public void pairPins(Transform left, Transform right, float percentile)
     {
 
