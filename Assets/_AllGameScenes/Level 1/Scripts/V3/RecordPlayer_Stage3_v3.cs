@@ -1,6 +1,9 @@
+using Obi;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+
+//documentation:
+//mvoe tonearm toward te impact point. 
 
 public class RecordPlayer_Stage3_v3 : MonoBehaviour
 {

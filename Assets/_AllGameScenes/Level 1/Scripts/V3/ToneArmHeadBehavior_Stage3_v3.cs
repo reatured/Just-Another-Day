@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
+
+//documentation
+//play music when the collider touches. 
 public class ToneArmHeadBehavior_Stage3_v3 : MonoBehaviour
 {
     public Collider playTrigger;
