@@ -32,9 +32,22 @@ public class ColorPicker_L3 : MonoBehaviour
         if (other.name == "BrushHead")
         {
             
-            paintingManager.brushColor = color;
-            paintingManager.currentBrushColorIndex = index;
-            brushBehavior.BrushColor = color; 
+            
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (other.name == "BrushHead")
+            {
+                paintingManager.brushColor = color;
+                paintingManager.currentBrushColorIndex = index;
+                brushBehavior.BrushColor = color;
+            }
+        }
+    }
+        
 }
