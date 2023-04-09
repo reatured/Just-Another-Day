@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1704120820942939641}
   - component: {fileID: 1704120820942939640}
   m_Layer: 0
-  m_Name: RedBall (2)
+  m_Name: Food_Broccoli
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704120821679257763}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -68.945, y: 30.868, z: 12.192}
 --- !u!23 &1704120821001720492
 MeshRenderer:
@@ -1379,7 +1379,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704120821679257763}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1704120821146116665
 MeshFilter:
@@ -1477,7 +1477,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704120821679257763}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1704120821256751294
 MeshFilter:
@@ -1591,7 +1591,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704120821679257763}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1704120821522167038
 MonoBehaviour:
@@ -1698,6 +1698,7 @@ Transform:
   m_LocalScale: {x: 0.5191, y: 0.5191, z: 0.5191}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5478625369199898235}
   - {fileID: 1704120821522167037}
   - {fileID: 4454561618381526814}
   - {fileID: 1704120821001720497}
@@ -1794,7 +1795,7 @@ GameObject:
   - component: {fileID: 1704120822204271976}
   - component: {fileID: 1704120822204271972}
   m_Layer: 0
-  m_Name: RedBall
+  m_Name: Food_Garlic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1929,7 +1930,7 @@ GameObject:
   - component: {fileID: 1704120822461512958}
   - component: {fileID: 1704120822461512957}
   m_Layer: 0
-  m_Name: RedBall (3)
+  m_Name: Food_YellowBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2064,7 +2065,7 @@ GameObject:
   - component: {fileID: 1704120822541874948}
   - component: {fileID: 1704120822541874955}
   m_Layer: 0
-  m_Name: RedBall (1)
+  m_Name: Food_Mushroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2184,6 +2185,141 @@ MonoBehaviour:
       m_Calls: []
   movementSurface: {fileID: 1704120821146116667}
   impactPoint: {x: 2.46, y: 0, z: 0}
+--- !u!1 &2345802146506737053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5478625369199898235}
+  - component: {fileID: 4894384175862608756}
+  - component: {fileID: 541711090375119968}
+  - component: {fileID: 8772010005213590031}
+  - component: {fileID: 364822273654247162}
+  - component: {fileID: 5867459706617580140}
+  m_Layer: 0
+  m_Name: Food_PickUp Trans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5478625369199898235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345802146506737053}
+  m_LocalRotation: {x: 0.1635526, y: -0.107446164, z: -0.17233473, w: 0.965405}
+  m_LocalPosition: {x: -0.25000006, y: 0.90199995, z: -1.4919995}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1704120821679257763}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 16.186, y: -15.945, z: -22.524}
+--- !u!33 &4894384175862608756
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345802146506737053}
+  m_Mesh: {fileID: 7729706833136109373, guid: aed373b11f958d04ca2f26f4a18ddc2d, type: 3}
+--- !u!23 &541711090375119968
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345802146506737053}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9fcb5e136c4f7834e9d0e5cb73e8a3f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &8772010005213590031
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345802146506737053}
+  m_Material: {fileID: 13400000, guid: b9576bcadd369fa4eab94316a2161bec, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &364822273654247162
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345802146506737053}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5867459706617580140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345802146506737053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531044c15b41f364b9b6dfc7a93597da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addOrder: 2
+  originalPos: {x: 0, y: 0, z: 0}
+  recipeCheckerObj: {fileID: 1704120821256751233}
+  mouseUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  movementSurface: {fileID: 1704120821146116667}
+  impactPoint: {x: 2.46, y: 0, z: 0}
 --- !u!1 &6735589592678842211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,7 +2352,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704120821679257763}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 66.846, z: 0}
 --- !u!23 &3678474890639228502
 MeshRenderer:
@@ -3856,7 +3992,7 @@ PrefabInstance:
     - target: {fileID: 493508727451809021, guid: 733d8012da1fb3f47a42de9c7a4ecfaa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 493508727451809021, guid: 733d8012da1fb3f47a42de9c7a4ecfaa,
         type: 3}
