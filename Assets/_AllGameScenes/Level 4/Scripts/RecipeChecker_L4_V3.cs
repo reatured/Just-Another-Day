@@ -6,7 +6,11 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
 {
     public MeshRenderer pot; 
     public Material potMaterial;
+    public MeshRenderer soup; 
+    public Material _soupMaterial;
+    public Color rawSoupColor, finishedSoupColor, badSoupColor;
 
+    public Color[] colors; 
     public FoodPickUp_L4_V3 foodToBeAdd;
 
     public int stage = 0;
@@ -17,14 +21,12 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
     void Start()
     {
         potMaterial = pot.material;
-        originalColor = MK.Toon.Properties.albedoColor.GetValue(potMaterial); 
+        _soupMaterial = soup.material; 
+        originalColor = MK.Toon.Properties.albedoColor.GetValue(potMaterial);
+        changeSoupColor(colors[0]);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void potSelected()
     {
@@ -65,18 +67,42 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
         foodToBeAdd.addFoodFeedback(false);
     }
 
-    public Animator potAnimator; 
-    
+    public Animator potAnimator;
+    public int totalStage = 3; 
     public void nextStgae()
     {
         stage++;
 
-        if(stage > 3)
+        startTime = Time.time;
+        StartCoroutine(lerpColor(colors[stage - 1], colors[stage]));
+        changeSoupColor(colors[stage]);
+        if(stage > totalStage)
         {
             potAnimator = pot.GetComponent<Animator>();
             //potAnimator.SetTrigger("Pour");
             lm.nextStageAfterSeconds(2f);
         }
         
+    }
+
+    public float animtionDuration;
+    public float startTime; 
+    IEnumerator lerpColor(Color start, Color end)
+    {
+        float journey = (Time.time - startTime) / animtionDuration;
+        while (journey < 1)
+        {
+            changeSoupColor(Color.Lerp(start, end, journey));
+            yield return new WaitForEndOfFrame();
+            journey = (Time.time - startTime) / animtionDuration;
+        }
+
+        changeSoupColor(end); 
+    }
+
+    public void changeSoupColor(Color color)
+    {
+        _soupMaterial.SetColor("_ColorShallow", color);
+        print(color);
     }
 }
