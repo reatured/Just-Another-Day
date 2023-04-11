@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MK.Toon;
+using UnityEngine.Events;
+
 public class RecipeChecker_L4_V3 : MonoBehaviour
 {
     public MeshRenderer pot; 
     public Material potMaterial;
     public MeshRenderer soup; 
     public Material _soupMaterial;
-    public Color rawSoupColor, finishedSoupColor, badSoupColor;
+
 
     public Color[] colors; 
     public FoodPickUp_L4_V3 foodToBeAdd;
@@ -78,15 +80,14 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
         changeSoupColor(colors[stage]);
         if(stage > totalStage)
         {
-            potAnimator = pot.GetComponent<Animator>();
-            //potAnimator.SetTrigger("Pour");
-            lm.nextStageAfterSeconds(2f);
+            lerpEndEvent.AddListener(enableScript);
         }
         
     }
 
     public float animtionDuration;
-    public float startTime; 
+    public float startTime;
+    public UnityEvent lerpEndEvent;
     IEnumerator lerpColor(Color start, Color end)
     {
         float journey = (Time.time - startTime) / animtionDuration;
@@ -98,11 +99,23 @@ public class RecipeChecker_L4_V3 : MonoBehaviour
         }
 
         changeSoupColor(end); 
+        if(lerpEndEvent != null)
+        {
+            lerpEndEvent.Invoke();
+        }
+
     }
 
     public void changeSoupColor(Color color)
     {
         _soupMaterial.SetColor("_ColorShallow", color);
-        print(color);
+
     }
+
+    public PourOutSoup_L4_V3 pourOutSoupScript;
+    public void enableScript()
+    {
+        pourOutSoupScript.enabled = true;
+    }
+
 }

@@ -135,19 +135,19 @@ Material:
     - _UvFadeY: 0.1
     - _WaterClearness: 0.444
     - _WaterDepth: 9.84
-    - _WaveAmplitude: 0.02
+    - _WaveAmplitude: 0.005
     - _WaveDirection: 0
-    - _WaveFrequency: 150
+    - _WaveFrequency: 10
     - _WaveMode: 3
     - _WaveNoise: 0
-    - _WaveSpeed: 1
+    - _WaveSpeed: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 1, b: 0.7287984, a: 1}
     - _ColorDeep: {r: 0.21052864, g: 0.5113482, b: 0.5377358, a: 1}
-    - _ColorShallow: {r: 0.75471693, g: 0.20291916, b: 0.7339128, a: 1}
+    - _ColorShallow: {r: 0.7529412, g: 0.3047227, b: 0.20392156, a: 1}
     - _ColorTop: {r: 1, g: 1, b: 1, a: 0}
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
