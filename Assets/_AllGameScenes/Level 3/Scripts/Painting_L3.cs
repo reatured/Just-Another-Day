@@ -19,7 +19,7 @@ public class Painting_L3 : MonoBehaviour
     public Transform movingObjTrans;
     bool pickedUp = false;
 
-    public ColorBlock[] blocks = new ColorBlock[6];
+    public ColorBlock[] blocks = new ColorBlock[5];
     public int[] CorrectColorOrder;
     public int currentBrushColorIndex = 0;
 
