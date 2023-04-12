@@ -130,7 +130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-295452
+  m_Name: pb_Mesh-82512
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -705,7 +705,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh347004
+  m_Name: pb_Mesh148202
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2020,7 +2020,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29450
+  m_Name: pb_Mesh148176
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2321,7 +2321,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29608
+  m_Name: pb_Mesh148314
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2485,7 +2485,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29814
+  m_Name: pb_Mesh148474
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3287,7 +3287,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29466
+  m_Name: pb_Mesh148192
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3594,7 +3594,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29740
+  m_Name: pb_Mesh148402
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3764,7 +3764,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-295204
+  m_Name: pb_Mesh-82264
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3928,7 +3928,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-295462
+  m_Name: pb_Mesh-82522
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4257,7 +4257,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 358b532284552b54e9680d2bebd494a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4296,14 +4296,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935106052}
-  m_LocalRotation: {x: -0, y: 0.86906534, z: -0, w: 0.49469727}
+  m_LocalRotation: {x: -0, y: 0.49469736, z: -0, w: -0.86906534}
   m_LocalPosition: {x: -3.075, y: 1.504, z: 10.044}
   m_LocalScale: {x: 0.014393673, y: 0.01439367, z: 0.014393673}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 194954448}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 120.7, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 300.7, z: 0}
 --- !u!114 &935106055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5874,7 +5874,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29246
+  m_Name: pb_Mesh148030
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9752,22 +9752,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layers:
-  - {fileID: 2800000, guid: 6a9745ec30830bf46a6a0600e7bc3654, type: 3}
-  - {fileID: 2800000, guid: f089b6bef8a13cd41867931525aab7da, type: 3}
-  - {fileID: 2800000, guid: 20b5d5f32e549c54c9a84e126f29dfc3, type: 3}
-  - {fileID: 2800000, guid: 639ff439541e6b542a59e6405a6cd295, type: 3}
-  - {fileID: 2800000, guid: 5b20d954fe08fe047a91e3593007c095, type: 3}
-  - {fileID: 2800000, guid: 8f32e09ad23cb974c876e9a6b7f1cebe, type: 3}
+  - {fileID: 2800000, guid: 172476cd6bfe06a4189a693c62e157f0, type: 3}
+  - {fileID: 2800000, guid: b396049516a2b754883cda533f42d680, type: 3}
+  - {fileID: 2800000, guid: 57a2eb819d8ebad44ae77ab2e64befd0, type: 3}
+  - {fileID: 2800000, guid: 2bbcdd94f9772904ba96266315182883, type: 3}
+  - {fileID: 2800000, guid: debf7cd4b7362004a9bba054719e6245, type: 3}
   paintingPaper: {fileID: 1026154920}
-  paintingTexture: {fileID: 2800000, guid: 5c59b84c65d632744834a5bc573201ad, type: 3}
+  paintingTexture: {fileID: 2800000, guid: 435aab5a05059954fbfa8bf04e80f28d, type: 3}
   paintingPaper_Mat: {fileID: 0}
   contactPoint: {x: 0, y: 0, z: 0}
-  colorMap_Texture: {fileID: 2800000, guid: 52c81a144d10c3c40bd3731653586e6c, type: 3}
+  colorMap_Texture: {fileID: 2800000, guid: a0fdc88c8de88164d9082b898f8aeafc, type: 3}
   colorStep: 0
   restTransform: {fileID: 1048592330}
   pickUpTransform: {fileID: 1433087631}
   movingObjTrans: {fileID: 1026154923}
-  CorrectColorOrder: 010000000200000002000000030000000400000005000000
+  CorrectColorOrder: 0100000002000000050000000400000003000000
   currentBrushColorIndex: 0
   lm: {fileID: 2000016689}
   brushBehavior: {fileID: 2089845881}
@@ -10717,7 +10716,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29670
+  m_Name: pb_Mesh148356
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10918,7 +10917,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh347140
+  m_Name: pb_Mesh148226
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13723,7 +13722,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh349338
+  m_Name: pb_Mesh148304
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15262,7 +15261,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 946bdb3ccc8de9247a6b74639e03ac58, type: 2}
+  - {fileID: 2100000, guid: e71364cfd2db637478f106fa662478ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15507,7 +15506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925575519}
   m_LocalRotation: {x: 0.1999176, y: 0.62113726, z: -0.24857332, w: -0.71584415}
-  m_LocalPosition: {x: -0.76985383, y: 0.0993, z: 0.4424643}
+  m_LocalPosition: {x: -0.76985383, y: 0.0934, z: 0.4424643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17083,7 +17082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc9589311845b40b655182c914a1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startFromStage: 4
+  startFromStage: 3
   stages:
   - {fileID: 868989625}
   - {fileID: 364804845}
@@ -17190,7 +17189,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh348044
+  m_Name: pb_Mesh148264
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23183,7 +23182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d035db0689c074388e7a272b3a5377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.3921569, g: 0.46274513, b: 0.9215687, a: 1}
+  color: {r: 0.8313726, g: 0.882353, b: 0.882353, a: 1}
   material: {fileID: 0}
   paintingManager: {fileID: 1129450557}
   index: 0
@@ -23766,7 +23765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d035db0689c074388e7a272b3a5377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.35686275, g: 0.12941177, b: 0, a: 1}
+  color: {r: 0.6784314, g: 0.7058824, b: 0.70980394, a: 1}
   material: {fileID: 0}
   paintingManager: {fileID: 1129450557}
   index: 0
@@ -23891,7 +23890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d035db0689c074388e7a272b3a5377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.03137255, g: 0.18431373, b: 0.7568628, a: 1}
+  color: {r: 0.427451, g: 0.65882355, b: 0.81568635, a: 1}
   material: {fileID: 0}
   paintingManager: {fileID: 1129450557}
   index: 0
@@ -23978,7 +23977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d035db0689c074388e7a272b3a5377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.7294118, g: 0.76470596, b: 0.74509805, a: 1}
+  color: {r: 0.4431373, g: 0.59607846, b: 0.31764707, a: 1}
   material: {fileID: 0}
   paintingManager: {fileID: 1129450557}
   index: 0
@@ -24125,7 +24124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d035db0689c074388e7a272b3a5377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.027450982, g: 0.40784317, b: 0.18039216, a: 1}
+  color: {r: 0.20784315, g: 0.37254903, b: 0.2901961, a: 1}
   material: {fileID: 0}
   paintingManager: {fileID: 1129450557}
   index: 0
