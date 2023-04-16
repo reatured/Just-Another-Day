@@ -7,6 +7,12 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
     public GameObject objectToPickUp;
     public Transform trans_PickUp, trans_rest;
     private bool pickedUp = false; //false: on the table
+    public bool defaultBehavior = true; 
+    public bool DefaultBehavior
+    {
+        get { return defaultBehavior; }
+        set { defaultBehavior = value; }
+    }
     public bool PickedUp
     {
         set
@@ -16,12 +22,10 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
             if (pickedUp)
             {
                 StartCoroutine(lerpPosition(objectToPickUp.transform, trans_PickUp, objectToPickUp.transform));
-                //StartCoroutine(lerpRotation(objectToPickUp.transform.rotation, trans_PickUp.rotation, objectToPickUp.transform));
             }
             else
             {
                 StartCoroutine(lerpPosition(objectToPickUp.transform, trans_rest, objectToPickUp.transform));
-                //StartCoroutine(lerpRotation(objectToPickUp.transform.rotation, trans_rest.rotation, objectToPickUp.transform));
             }
 
         }
@@ -33,26 +37,35 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
         trans_PickUp.gameObject.SetActive(false);
         trans_rest.gameObject.SetActive(false);
     }
+    public UnityEvent clickEvent; 
     private void OnMouseDown()
     {
+        if (!defaultBehavior) return;
+        pickUpOrPutDownCoroutine();
+        if(clickEvent != null) clickEvent.Invoke();
+    }
+
+
+    public void pickUpOrPutDownCoroutine()
+    {
+        
         StopAllCoroutines();
         startTime = Time.time;
         PickedUp = !PickedUp;
         print("clicked");
-
     }
 
     //===============Helper Script=======================
     float startTime = 0;
 
     public float animationDuration;
-    public UnityEvent lerpFinishEvent;
+    public UnityEvent pickUpEvent, putDownEvent;
     float journey = 0;
     IEnumerator lerpPosition(Transform start, Transform end, Transform movingTrans)
     {
 
         journey = (Time.time - startTime) / animationDuration;
-
+        bool activated = false;
         while (journey < 1.1f)
         {
             //print("running" + Vector3.Lerp(start, end, journey) + "\nJourney" + journey);
@@ -61,31 +74,30 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
             movingTrans.localScale = Vector3.Lerp(start.localScale, end.localScale, journey);
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / animationDuration;
+
+            if(journey > 0.3f)
+            {
+                
+                if(!activated)
+                {
+                    print(journey);
+                    if (pickedUp)
+                    {
+                        if (pickUpEvent != null) pickUpEvent.Invoke();
+                    }
+                    else
+                    {
+                        if (putDownEvent != null) putDownEvent.Invoke();
+                    }
+                    activated = true;
+                }
+            }
         }
 
         movingTrans.position = end.position;
         movingTrans.rotation = end.rotation;
         movingTrans.localScale = end.localScale;
-        if (lerpFinishEvent != null)
-        {
-            lerpFinishEvent.Invoke();
-        }
-    }
-
-    IEnumerator lerpRotation(Quaternion start, Quaternion end, Transform movingTrans)
-    {
-        journey = (Time.time - startTime) / animationDuration;
-
-        while (journey < 1.1f)
-        {
-
-            movingTrans.rotation = Quaternion.Slerp(start, end, journey);
-            yield return new WaitForFixedUpdate();
-            journey = (Time.time - startTime) / animationDuration;
-            print(journey);
-        }
-        movingTrans.rotation = end;
+        
 
     }
-
 }

@@ -16489,7 +16489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc9589311845b40b655182c914a1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startFromStage: 4
+  startFromStage: 1
   stages:
   - {fileID: 868989625}
   - {fileID: 364804845}
@@ -18737,6 +18737,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246921621003616132, guid: e25d0bb69f4bfb447b3004b0738a50d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5317535228888031659, guid: e25d0bb69f4bfb447b3004b0738a50d8,
         type: 3}
@@ -22825,6 +22830,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 90506532}
     m_Modifications:
+    - target: {fileID: 1821132237319464518, guid: a072a0b424ceedf45a67d70654dcdbe4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716576940762509683, guid: a072a0b424ceedf45a67d70654dcdbe4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8546556736363376906, guid: a072a0b424ceedf45a67d70654dcdbe4,
         type: 3}
       propertyPath: m_RootOrder
