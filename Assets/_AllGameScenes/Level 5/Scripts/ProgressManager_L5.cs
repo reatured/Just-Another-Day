@@ -47,4 +47,8 @@ public class ProgressManager_L5 : MonoBehaviour
         }
 
     }
+    public void nextStage()
+    {
+
+    }
 }

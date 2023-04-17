@@ -1,57 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MK.Toon; 
+using MK.Toon;
+using UnityEngine.Events;
 
 public class SisterFadeOut_L5 : MonoBehaviour
 {
-    public List<Material> sisterMaterials;
-    public MeshRenderer[] sisterMeshes;
-    MeshRenderer pointMesh;
-    public Color matColor = Color.white;
-    public int totalHealth = 5;
-    public int currentHealth; 
+    [Header("Materials")]
+    [SerializeField] private List<Material> sisterMaterials = new List<Material>();
+    [SerializeField] private MeshRenderer[] sisterMeshes = null;
+    [SerializeField] private MeshRenderer pointMesh = null;
+    [SerializeField] private Color matColor = Color.white;
+
+    [Header("Health")]
+    [SerializeField] private int totalHealth = 5;
+    [SerializeField] private int currentHealth = 5;
+
+    [Header("Events")]
+    public UnityEvent sisterDisappearEvent;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         currentHealth = totalHealth;
 
         sisterMeshes = gameObject.GetComponentsInChildren<MeshRenderer>();
-        for(int i = 0; i < sisterMeshes.Length; i++)
+        foreach (MeshRenderer mesh in sisterMeshes)
         {
-            pointMesh = sisterMeshes[i];
-            for(int j = 0; j< pointMesh.materials.Length; j++)
+            pointMesh = mesh;
+            foreach (Material mat in pointMesh.materials)
             {
-                sisterMaterials.Add(pointMesh.materials[j]);
+                sisterMaterials.Add(mat);
             }
         }
 
-        foreach(Material mat in sisterMaterials)
+        foreach (Material mat in sisterMaterials)
         {
             MK.Toon.Properties.albedoColor.SetValue(mat, matColor);
         }
-
-        //testMaterial = testMesh.material;
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-         
         if (other.gameObject.tag != "Soup") return;
 
+        if (currentHealth <= 0) return;
+
         currentHealth--;
+
         float colorPercent = 1f * currentHealth / totalHealth;
         matColor = new Color(colorPercent, colorPercent, colorPercent, colorPercent);
+
         foreach (Material mat in sisterMaterials)
         {
             MK.Toon.Properties.albedoColor.SetValue(mat, matColor);
+        }
+
+        if (currentHealth <= 0 && sisterDisappearEvent != null)
+        {
+            sisterDisappearEvent.Invoke();
         }
     }
 }

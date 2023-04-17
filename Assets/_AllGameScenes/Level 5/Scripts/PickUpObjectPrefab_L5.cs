@@ -7,12 +7,15 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
     public GameObject objectToPickUp;
     public Transform trans_PickUp, trans_rest;
     private bool pickedUp = false; //false: on the table
-    public bool defaultBehavior = true; 
+    public bool defaultBehavior = true;
+
+    public UnityEvent clickEvent;
     public bool DefaultBehavior
     {
         get { return defaultBehavior; }
         set { defaultBehavior = value; }
     }
+
     public bool PickedUp
     {
         set
@@ -33,16 +36,16 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
     }
 
     private void Start()
-    {
+    {//disable coordinate transforms at the beginning
         trans_PickUp.gameObject.SetActive(false);
         trans_rest.gameObject.SetActive(false);
     }
-    public UnityEvent clickEvent; 
+
     private void OnMouseDown()
-    {
+    {//disable default behavior. ex. prevent putting down object
         if (!defaultBehavior) return;
         pickUpOrPutDownCoroutine();
-        if(clickEvent != null) clickEvent.Invoke();
+        //if(clickEvent != null) clickEvent.Invoke();
     }
 
 
@@ -52,7 +55,13 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
         StopAllCoroutines();
         startTime = Time.time;
         PickedUp = !PickedUp;
-        print("clicked");
+        print(PickedUp);
+    }
+
+    public UnityEvent nextLevelEvent;
+    private void OnMouseUp()
+    {
+        if (nextLevelEvent != null) nextLevelEvent.Invoke();
     }
 
     //===============Helper Script=======================
@@ -61,11 +70,13 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
     public float animationDuration;
     public UnityEvent pickUpEvent, putDownEvent;
     float journey = 0;
-    IEnumerator lerpPosition(Transform start, Transform end, Transform movingTrans)
-    {
 
+
+    IEnumerator lerpPosition(Transform start, Transform end, Transform movingTrans, float eventWaitTime = 0.3f)
+    {
         journey = (Time.time - startTime) / animationDuration;
         bool activated = false;
+
         while (journey < 1.1f)
         {
             //print("running" + Vector3.Lerp(start, end, journey) + "\nJourney" + journey);
@@ -75,29 +86,25 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / animationDuration;
 
-            if(journey > 0.3f)
+            if (journey > eventWaitTime && !activated)
             {
-                
-                if(!activated)
+                if (pickedUp)
                 {
-                    print(journey);
-                    if (pickedUp)
-                    {
-                        if (pickUpEvent != null) pickUpEvent.Invoke();
-                    }
-                    else
-                    {
-                        if (putDownEvent != null) putDownEvent.Invoke();
-                    }
-                    activated = true;
+
+                    if (pickUpEvent != null) pickUpEvent.Invoke();
+                    print("pickUp" + pickedUp);
                 }
+                else
+                {
+                    if (putDownEvent != null) putDownEvent.Invoke();
+                    print("putdown" + pickedUp);
+                }
+                activated = true;
             }
         }
 
         movingTrans.position = end.position;
         movingTrans.rotation = end.rotation;
         movingTrans.localScale = end.localScale;
-        
-
     }
 }
