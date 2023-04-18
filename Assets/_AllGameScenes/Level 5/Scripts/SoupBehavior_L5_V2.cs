@@ -144,7 +144,7 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         GameObject emptyObject = new GameObject(); // Set the new transform to be a child of the original transform's parent
         emptyObject.transform.SetParent(transform.parent);// Assign the same position, rotation, and scale values as the original transform
         emptyObject.transform.position = transform.position;
-        emptyObject.transform.rotation00 = transform.rotation;
+        emptyObject.transform.rotation = transform.rotation;
         emptyObject.transform.localScale = transform.localScale;
         Transform newTransform = emptyObject.transform; // Assign the new transform to the newly created game object
 
