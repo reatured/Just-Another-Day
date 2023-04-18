@@ -23075,6 +23075,11 @@ PrefabInstance:
       propertyPath: pourSoupTransform
       value: 
       objectReference: {fileID: 691607081}
+    - target: {fileID: 3716576939957642284, guid: a072a0b424ceedf45a67d70654dcdbe4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 3716576939957642285, guid: a072a0b424ceedf45a67d70654dcdbe4,
         type: 3}
       propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size

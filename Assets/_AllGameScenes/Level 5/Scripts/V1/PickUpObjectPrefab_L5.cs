@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,9 +8,7 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
     public GameObject objectToPickUp;
     public Transform trans_PickUp, trans_rest;
     private bool pickedUp = false; //false: on the table
-    public bool defaultBehavior = true;
-
-    public UnityEvent clickEvent;
+    [SerializeField]private bool defaultBehavior = true;
     public bool DefaultBehavior
     {
         get { return defaultBehavior; }
@@ -22,14 +21,18 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
         {
 
             pickedUp = value;
+            if (lerpCoroutine != null) StopCoroutine(lerpCoroutine);
+            //GetComponent<Collider>().enabled = false;
+            startTime = Time.time; 
             if (pickedUp)
             {
-                StartCoroutine(lerpPosition(objectToPickUp.transform, trans_PickUp, objectToPickUp.transform));
+                lerpCoroutine = lerpPosition(objectToPickUp.transform, trans_PickUp, objectToPickUp.transform);
             }
             else
             {
-                StartCoroutine(lerpPosition(objectToPickUp.transform, trans_rest, objectToPickUp.transform));
+                lerpCoroutine = lerpPosition(objectToPickUp.transform, trans_rest, objectToPickUp.transform);
             }
+            StartCoroutine(lerpCoroutine);
 
         }
         get { return pickedUp; }
@@ -40,42 +43,42 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
         trans_PickUp.gameObject.SetActive(false);
         trans_rest.gameObject.SetActive(false);
     }
+    public UnityEvent clickStartEvent;
+    public UnityEvent clickEndEvent;
+    public UnityEvent pickUpEvent, putDownEvent;
+    IEnumerator lerpCoroutine; 
+    //public void pickUpOrPutDownCoroutine()
+    //{
+    //    if(lerpCoroutine != null) StopCoroutine(lerpCoroutine);
+    //    startTime = Time.time;
+        
+    //}
 
     private void OnMouseDown()
     {//disable default behavior. ex. prevent putting down object
-        if (!defaultBehavior) return;
-        pickUpOrPutDownCoroutine();
+
+        //if (!defaultBehavior) return;
+        PickedUp = !PickedUp;
         //if(clickEvent != null) clickEvent.Invoke();
     }
 
-
-    public void pickUpOrPutDownCoroutine()
-    {
-        
-        StopAllCoroutines();
-        startTime = Time.time;
-        PickedUp = !PickedUp;
-        print(PickedUp);
-    }
-
-    public UnityEvent nextLevelEvent;
     private void OnMouseUp()
     {
-        if (nextLevelEvent != null) nextLevelEvent.Invoke();
+        doubleTriggerEvent();
     }
 
     //===============Helper Script=======================
     float startTime = 0;
 
     public float animationDuration;
-    public UnityEvent pickUpEvent, putDownEvent;
+    
     float journey = 0;
-
+    bool firstTriggered = false;
 
     IEnumerator lerpPosition(Transform start, Transform end, Transform movingTrans, float eventWaitTime = 0.3f)
     {
         journey = (Time.time - startTime) / animationDuration;
-        bool activated = false;
+        //bool activated = false;
 
         while (journey < 1.1f)
         {
@@ -86,25 +89,46 @@ public class PickUpObjectPrefab_L5 : MonoBehaviour
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / animationDuration;
 
-            if (journey > eventWaitTime && !activated)
-            {
-                if (pickedUp)
-                {
-
-                    if (pickUpEvent != null) pickUpEvent.Invoke();
-                    print("pickUp" + pickedUp);
-                }
-                else
-                {
-                    if (putDownEvent != null) putDownEvent.Invoke();
-                    print("putdown" + pickedUp);
-                }
-                activated = true;
-            }
+            //if (journey > eventWaitTime && !activated)
+            //{
+            //    doubleTriggerEvent(); 
+            //    activated = true;
+            //    print(PickedUp + " Triggered at " + journey);
+            //}
         }
-
+        
+        
+        GetComponent<Collider>().enabled = true;
         movingTrans.position = end.position;
         movingTrans.rotation = end.rotation;
         movingTrans.localScale = end.localScale;
     }
+
+    public void doubleTriggerEvent()
+    {
+        print("Trigger: "+firstTriggered);
+        if (firstTriggered)
+        {
+            if (pickedUp)
+            {
+
+                if (pickUpEvent != null) pickUpEvent.Invoke();
+
+            }
+            else
+            {
+                if (putDownEvent != null) putDownEvent.Invoke();
+
+            }
+
+            firstTriggered = false;
+            
+        }
+        else
+        {
+            firstTriggered = true;
+            print("switchTrigger");
+        }
+    }
 }
+
