@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 public class SoupBehavior_L5_V2 : MonoBehaviour
@@ -97,9 +98,22 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         {
             
             lerpEndEvent.AddListener(pickUp);
+            lerpEndEvent.AddListener(emptySoup);
+            lerpEndEvent.AddListener(nextStage);
+
+            //empty soup.,.
+
             PickedUp = false;
         }
         isSelected = true;
+
+
+    }
+
+    public GameObject soupObj; 
+    public void emptySoup()
+    {
+        soupObj.SetActive(false);
 
 
     }
