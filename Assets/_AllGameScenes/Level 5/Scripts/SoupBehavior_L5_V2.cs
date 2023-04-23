@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class SoupBehavior_L5_V2 : MonoBehaviour
 {
     public GameObject objectToPickUp;
+    public GameObject objectOfRestTransform; 
     public Transform trans_PickUp, trans_rest;
     public Transform trans_Pour; 
     private bool pickedUp = false; //false: on the table
@@ -16,7 +17,12 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     public int STAGE_pickUp = 0;
     public int STAGE_pickUpAnimating = 1;
     public int STAGE_pickDragging = 2;
-    public int STAGE_ClickToPour = 3; 
+    public int STAGE_ClickToPour = 3;
+    public int STAGE_PutSoupBack = 4;
+
+    public GameObject soupObj;
+
+    public LevelManager level5Manager; 
     public int Stage
     {
         get { return stage; }
@@ -49,6 +55,11 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
             else
             {
                 lerpCoroutine = lerpPosition(objectToPickUp.transform, trans_rest, objectToPickUp.transform);
+                if(stage == STAGE_PutSoupBack)
+                {
+                    print("next object");
+                    level5Manager.nextStage(); 
+                }
             }
             StartCoroutine(lerpCoroutine);
 
@@ -60,11 +71,12 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     {//disable coordinate transforms at the beginning
         trans_PickUp.gameObject.SetActive(false);
         trans_rest.gameObject.SetActive(false);
+        inactiveSoup.SetActive(false);
     }
 
     private void Update()
     {
-        if (stage == STAGE_pickUpAnimating || stage == STAGE_pickDragging)
+        if (stage == STAGE_pickUpAnimating || stage == STAGE_pickDragging || stage == STAGE_PutSoupBack)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -99,24 +111,23 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
             
             lerpEndEvent.AddListener(pickUp);
             lerpEndEvent.AddListener(emptySoup);
-            lerpEndEvent.AddListener(nextStage);
+            lerpEndEvent.AddListener(goToStage_Last);
 
             //empty soup.,.
 
             PickedUp = false;
+        }else if(stage == STAGE_PutSoupBack)
+        {
+            lerpEndEvent.RemoveAllListeners(); 
+
         }
         isSelected = true;
 
 
     }
 
-    public GameObject soupObj; 
-    public void emptySoup()
-    {
-        soupObj.SetActive(false);
-
-
-    }
+    
+    
 
     private void OnMouseDrag()
     {
@@ -148,7 +159,8 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     {
         stage = STAGE_pickDragging; 
     }
-
+    //Get ready for STAGE 3
+    //switch the rest transform. 
     public void goToStage_Pour()
     {
         stage = STAGE_ClickToPour;
@@ -164,10 +176,26 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
 
         trans_PickUp = newTransform;
     }
+    public void emptySoup()
+    {
+        soupObj.SetActive(false);
+    }
+    //Get ready for STAGE 4
+    //switch the rest transform back.
+    //
 
+    public void goToStage_Last()
+    {
+        nextStage(); 
+        trans_rest = objectOfRestTransform.transform; 
+    }
 
-
-
+    public GameObject inactiveSoup; 
+    private void OnDisable()
+    {
+        inactiveSoup.SetActive(true); 
+        print("soup disabled");
+    }
 
 
     //===============Helper Script=======================
