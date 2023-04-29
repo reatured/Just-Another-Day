@@ -23,7 +23,8 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
 
 
     public LevelManager level5Manager;
-
+    private bool offsetUpdated = false;
+    public GameObject fullPainting; 
     public bool PickedUp //for lerp animation
     {
         set
@@ -73,7 +74,14 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
             }
         }
     }
-
+    private void OnEnable()
+    {
+        fullPainting.SetActive(false);
+    }
+    private void OnDisable()
+    {
+        fullPainting.SetActive(true);
+    }
     private void OnMouseDown()
     {
         if (stage == STAGE_pickUp)
@@ -88,6 +96,7 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
             Cursor.visible = false;
             getImpactPoint(movementSurface);
             offset = transform.position - impactPoint;
+            offsetUpdated = true; 
         }
         //else if (stage == STAGE_ClickToPour)
         //{
@@ -109,7 +118,7 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
     }
     private void OnMouseDrag()
     {
-        if (stage == STAGE_pickDragging)
+        if (stage == STAGE_pickDragging && offsetUpdated)
         {
             getImpactPoint(movementSurface);
             transform.position = impactPoint + offset;
@@ -117,6 +126,7 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        offsetUpdated = false;
         isSelected = false;
         Cursor.visible = true;
 
