@@ -23,7 +23,7 @@ public class SkyColorManager : MonoBehaviour
 
     public void changeSkyColor()
     {
-
+        print("Change Skycolor");
         currenetLevel = levelManager.currentStage; 
         startTime = Time.time;
         StartCoroutine(lerpSkyColor(RenderSettings.ambientSkyColor, colors[currenetLevel - 1]));
