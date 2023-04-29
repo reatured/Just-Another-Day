@@ -92,7 +92,7 @@ public class SoupBehavior_L5 : MonoBehaviour
     {
         Trans_PourSoup.gameObject.SetActive(false);
         defaultScript = GetComponent<PickUpObjectPrefab_L5>();
-        soupCollider = GetComponent<Collider>();
+        objectCollider = GetComponent<Collider>();
     }
     private bool condition_backTo0;
 
@@ -100,7 +100,7 @@ public class SoupBehavior_L5 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!getImpactPoint(soupCollider)) //put the soup back
+            if (!getImpactPoint(objectCollider)) //put the soup back
             {
                 if (stageIndex == 1 || stageIndex == 3)
                 {
@@ -153,7 +153,7 @@ public class SoupBehavior_L5 : MonoBehaviour
 
     //===============Helper Script=======================
     //collider impactPoint;
-    public Collider soupCollider;
+    public Collider objectCollider;
     public Collider movementSurface;
     public Vector3 impactPoint;
     Ray ray;

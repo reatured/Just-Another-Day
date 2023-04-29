@@ -1,13 +1,14 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class SoupBehavior_L5_V2 : MonoBehaviour
+
+public class PaintingBehavior_L5_V2 : MonoBehaviour
 {
     public GameObject objectToPickUp;
-    public GameObject objectOfRestTransform; 
+    public GameObject objectOfRestTransform;
     public Transform trans_PickUp, trans_rest;
-    public Transform trans_Pour; 
+    public Transform trans_Pour;
     private bool pickedUp = false; //false: on the table
     [SerializeField] private bool defaultBehavior = true;
     public int stage = 0;
@@ -15,14 +16,13 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     IEnumerator lerpCoroutine;
 
     public int STAGE_pickUp = 0;
-    public int STAGE_pickUpAnimating = 1; //disable dragging, just for transition
+    public int STAGE_pickUpAnimating = 1;
     public int STAGE_pickDragging = 2;
-    public int STAGE_ClickToPour = 3;
-    public int STAGE_PutSoupBack = 4;
+    public int STAGE_ClickToTear = 3;
+    public int STAGE_PutPaintingBack = 4;
 
-    public GameObject soupObj;
 
-    public LevelManager level5Manager; 
+    public LevelManager level5Manager;
 
     public bool PickedUp //for lerp animation
     {
@@ -40,10 +40,10 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
             else
             {
                 lerpCoroutine = lerpPosition(objectToPickUp.transform, trans_rest, objectToPickUp.transform);
-                if(stage == STAGE_PutSoupBack)
+                if (stage == STAGE_PutPaintingBack)
                 {
                     print("next object");
-                    level5Manager.nextStage(); 
+                    level5Manager.nextStage();
                 }
             }
             StartCoroutine(lerpCoroutine);
@@ -51,17 +51,16 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         }
         get { return pickedUp; }
     }
-
-    private void Start()
-    {//disable coordinate transforms at the beginning
-        trans_PickUp.gameObject.SetActive(false);
-        trans_rest.gameObject.SetActive(false);
-        inactiveSoup.SetActive(false);
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
-    private void Update() //click outside to put it back
+    // Update is called once per frame
+    void Update()
     {
-        if (stage == STAGE_pickUpAnimating || stage == STAGE_pickDragging || stage == STAGE_PutSoupBack)
+        if (stage == STAGE_pickUpAnimating || stage == STAGE_pickDragging || stage == STAGE_PutPaintingBack)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -69,13 +68,11 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
                 {
                     PickedUp = false;
                     stage = 0;
-                    
+
                 }
             }
         }
     }
-
-
 
     private void OnMouseDown()
     {
@@ -87,31 +84,29 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         }
         else if (stage == STAGE_pickDragging)
         {
-            StopAllCoroutines(); 
+            StopAllCoroutines();
             Cursor.visible = false;
             getImpactPoint(movementSurface);
             offset = transform.position - impactPoint;
-        }else if(stage == STAGE_ClickToPour)
-        {
-            
-            lerpEndEvent.AddListener(pickUp);
-            lerpEndEvent.AddListener(emptySoup);
-            lerpEndEvent.AddListener(goToStage_Last);
-
-            //empty soup.,.
-
-            PickedUp = false;
-        }else if(stage == STAGE_PutSoupBack)
-        {
-            lerpEndEvent.RemoveAllListeners(); 
-
         }
+        //else if (stage == STAGE_ClickToPour)
+        //{
+
+        //    lerpEndEvent.AddListener(pickUp);
+        //    lerpEndEvent.AddListener(emptySoup);
+        //    lerpEndEvent.AddListener(goToStage_Last);
+
+        //    //empty soup.,.
+
+        //    PickedUp = false;
+        //}
+        //else if (stage == STAGE_PutSoupBack)
+        //{
+        //    lerpEndEvent.RemoveAllListeners();
+
+        //}
         isSelected = true;
     }
-
-    
-    
-
     private void OnMouseDrag()
     {
         if (stage == STAGE_pickDragging)
@@ -126,7 +121,6 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         Cursor.visible = true;
 
     }
-
     public void pickUp()
     {
         PickedUp = true;
@@ -137,47 +131,9 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         print("nextStage");
         stage++;
     }
-
     public void goToStage_Drag()
     {
-        stage = STAGE_pickDragging; 
-    }
-    //Get ready for STAGE 3
-    //switch the rest transform. 
-    public void goToStage_Pour()
-    {
-        stage = STAGE_ClickToPour;
-
-        trans_rest = trans_Pour;
-
-        GameObject emptyObject = new GameObject(); // Set the new transform to be a child of the original transform's parent
-        emptyObject.transform.SetParent(transform.parent);// Assign the same position, rotation, and scale values as the original transform
-        emptyObject.transform.position = transform.position;
-        emptyObject.transform.rotation = transform.rotation;
-        emptyObject.transform.localScale = transform.localScale;
-        Transform newTransform = emptyObject.transform; // Assign the new transform to the newly created game object
-
-        trans_PickUp = newTransform;
-    }
-    public void emptySoup()
-    {
-        soupObj.SetActive(false);
-    }
-    //Get ready for STAGE 4
-    //switch the rest transform back.
-    //
-
-    public void goToStage_Last()
-    {
-        nextStage(); 
-        trans_rest = objectOfRestTransform.transform; 
-    }
-
-    public GameObject inactiveSoup; 
-    private void OnDisable()
-    {
-        inactiveSoup.SetActive(true); 
-        print("soup disabled");
+        stage = STAGE_pickDragging;
     }
 
 
@@ -218,12 +174,12 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
 
     //===============Helper Script=======================
     //collider impactPoint;
-    private Collider soupCollider;
+    public Collider objectCollider;
     public Collider movementSurface;
     public Vector3 impactPoint;
     Ray ray;
     RaycastHit hit;
-    public Vector3 offset; 
+    public Vector3 offset;
     public bool getImpactPoint(Collider collider)
     {
 
@@ -237,7 +193,3 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         return false;
     }
 }
-
-
-
-
