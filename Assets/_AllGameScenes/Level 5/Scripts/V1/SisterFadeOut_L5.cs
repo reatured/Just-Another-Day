@@ -18,7 +18,7 @@ public class SisterFadeOut_L5 : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent sisterDisappearEvent;
-
+    public Shader newShader;
     // Start is called before the first frame update
     private void Start()
     {
@@ -37,7 +37,12 @@ public class SisterFadeOut_L5 : MonoBehaviour
         foreach (Material mat in sisterMaterials)
         {
             MK.Toon.Properties.albedoColor.SetValue(mat, matColor);
+            mat.shader = newShader;
+            MK.Toon.Properties.surface.SetValue(mat, MK.Toon.Surface.Transparent);
+            MK.Toon.Properties.blend.SetValue(mat, MK.Toon.Blend.Additive);
         }
+
+
     }
 
     // Update is called once per frame
@@ -48,23 +53,70 @@ public class SisterFadeOut_L5 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Soup") return;
 
-        if (currentHealth <= 0) return;
-
-        currentHealth--;
-
-        float colorPercent = 1f * currentHealth / totalHealth;
-        matColor = new Color(colorPercent, colorPercent, colorPercent, colorPercent);
-
-        foreach (Material mat in sisterMaterials)
+        if (other.gameObject.tag == "Soup")
         {
-            MK.Toon.Properties.albedoColor.SetValue(mat, matColor);
+            if (currentHealth <= 0) return;
+
+            currentHealth--;
+
+            float colorPercent = 1f * currentHealth / totalHealth;
+            matColor = new Color(colorPercent, colorPercent, colorPercent, 1);
+
+            foreach (Material mat in sisterMaterials)
+            {
+                Color startColor = MK.Toon.Properties.albedoColor.GetValue(mat);
+                Color endColor = startColor;
+                endColor.a = colorPercent;
+                startTime = Time.time;
+                StartCoroutine(lerpColor(startColor, endColor, mat));
+                //MK.Toon.Properties.albedoColor.SetValue(mat, matColor);
+            }
+
+            if (currentHealth <= 0 && sisterDisappearEvent != null)
+            {
+                sisterDisappearEvent.Invoke();
+            }
+        }
+        else if(other.gameObject.tag == "Painting")
+        {
+            print("sister goes transparent");
+            foreach (Material mat in sisterMaterials)
+            {
+                
+                startTime = Time.time;
+                Color startColor = MK.Toon.Properties.albedoColor.GetValue(mat);
+                Color endColor = startColor;
+                endColor.a = 0;
+                StartCoroutine(lerpColor(startColor, endColor, mat));
+                
+            }
         }
 
-        if (currentHealth <= 0 && sisterDisappearEvent != null)
+        
+
+        
+    }
+
+    float startTime;
+    public float animationDuration;
+
+    IEnumerator lerpColor(Color start, Color end, Material mat)
+    {
+        float journey = (Time.time - startTime) / animationDuration;
+        
+        while (journey < 1)
         {
-            sisterDisappearEvent.Invoke();
+            journey = (Time.time - startTime) / animationDuration;
+            
+            Color currentColor = Color.Lerp(start, end, journey);
+            print(currentColor);
+            MK.Toon.Properties.albedoColor.SetValue(mat, currentColor);
+            yield return new WaitForFixedUpdate();
         }
+
+        MK.Toon.Properties.albedoColor.SetValue(mat, end);
+
+
     }
 }

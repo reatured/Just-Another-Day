@@ -22,6 +22,7 @@ Material:
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
   - _FRESNELHIGHLIGHTS_ON
+  - _MK_BLEND_CUSTOM
   - _RECEIVESHADOWS_ON
   - _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 4
@@ -202,9 +203,9 @@ Material:
     - _Artistic: 0
     - _ArtisticFrequency: 1
     - _ArtisticProjection: 0
-    - _Blend: 0
-    - _BlendDst: 0
-    - _BlendSrc: 1
+    - _Blend: 4
+    - _BlendDst: 10
+    - _BlendSrc: 5
     - _Brightness: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -301,7 +302,7 @@ Material:
     - _Workflow: 0
     - _WorkflowMode: 1
     - _WrappedLighting: 1
-    - _ZTest: 4
+    - _ZTest: 6
     - _ZWrite: 1
     m_Colors:
     - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
