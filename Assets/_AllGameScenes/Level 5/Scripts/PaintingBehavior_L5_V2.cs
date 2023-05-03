@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MK.Toon;
 
 public class PaintingBehavior_L5_V2 : MonoBehaviour
 {
@@ -23,8 +24,13 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
 
 
     public LevelManager level5Manager;
-    private bool offsetUpdated = false;
-    public GameObject fullPainting; 
+
+    public GameObject fullPainting;
+
+    public Texture newTexture;
+    public Renderer[] paintingMeshs;
+    public List<Material> paintingMats;
+    private bool canDrag = false; 
     public bool PickedUp //for lerp animation
     {
         set
@@ -55,7 +61,14 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        paintingMeshs = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer renderer in paintingMeshs)
+        {
+            foreach (Material material in renderer.materials)
+            {
+                paintingMats.Add(material);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -80,7 +93,7 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
     }
     private void OnDisable()
     {
-        fullPainting.SetActive(true);
+        //fullPainting.SetActive(true);
     }
     private void OnMouseDown()
     {
@@ -96,37 +109,31 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
             Cursor.visible = false;
             getImpactPoint(movementSurface);
             offset = transform.position - impactPoint;
-            offsetUpdated = true; 
+            canDrag = true; 
         }
-        //else if (stage == STAGE_ClickToPour)
-        //{
-
-        //    lerpEndEvent.AddListener(pickUp);
-        //    lerpEndEvent.AddListener(emptySoup);
-        //    lerpEndEvent.AddListener(goToStage_Last);
-
-        //    //empty soup.,.
-
-        //    PickedUp = false;
-        //}
-        //else if (stage == STAGE_PutSoupBack)
-        //{
-        //    lerpEndEvent.RemoveAllListeners();
-
-        //}
+        else if(stage == STAGE_ClickToTear)
+        {
+            foreach(Material mat in paintingMats)
+            {
+                MK.Toon.Properties.albedoMap.SetValue(mat, newTexture);
+            }
+            GetComponent<Animator>().SetTrigger("Tear");
+        }
         isSelected = true;
     }
     private void OnMouseDrag()
     {
-        if (stage == STAGE_pickDragging && offsetUpdated)
+        if (stage == STAGE_pickDragging && canDrag)
         {
-            getImpactPoint(movementSurface);
-            transform.position = impactPoint + offset;
+
+                getImpactPoint(movementSurface);
+                transform.position = impactPoint + offset;
+            
         }
     }
     private void OnMouseUp()
     {
-        offsetUpdated = false;
+        canDrag = false;
         isSelected = false;
         Cursor.visible = true;
 
@@ -146,6 +153,12 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
         stage = STAGE_pickDragging;
     }
 
+    public void goToStage_ClickToTear()
+    {
+        canDrag = false;
+        PickedUp = true;
+        stage = STAGE_ClickToTear; 
+    }
 
     //===============Helper Script=======================
     float startTime = 0;

@@ -22,6 +22,8 @@ public class SisterFadeOut_L5 : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+
+
         currentHealth = totalHealth;
 
         sisterMeshes = gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -75,27 +77,27 @@ public class SisterFadeOut_L5 : MonoBehaviour
 
             if (currentHealth <= 0 && sisterDisappearEvent != null)
             {
+                Invoke("disableMeshes", animationDuration);
                 sisterDisappearEvent.Invoke();
             }
         }
         else if(other.gameObject.tag == "Painting")
         {
-            print("sister goes transparent");
-            foreach (Material mat in sisterMaterials)
-            {
-                
-                startTime = Time.time;
-                Color startColor = MK.Toon.Properties.albedoColor.GetValue(mat);
-                Color endColor = startColor;
-                endColor.a = 0;
-                StartCoroutine(lerpColor(startColor, endColor, mat));
-                
-            }
+            other.GetComponent<PaintingBehavior_L5_V2>().goToStage_ClickToTear();
+
         }
 
         
 
         
+    }
+
+    public void disableMeshes()
+    {
+        foreach (MeshRenderer mesh in sisterMeshes)
+        {
+            mesh.enabled = false;
+        }
     }
 
     float startTime;
@@ -110,7 +112,6 @@ public class SisterFadeOut_L5 : MonoBehaviour
             journey = (Time.time - startTime) / animationDuration;
             
             Color currentColor = Color.Lerp(start, end, journey);
-            print(currentColor);
             MK.Toon.Properties.albedoColor.SetValue(mat, currentColor);
             yield return new WaitForFixedUpdate();
         }

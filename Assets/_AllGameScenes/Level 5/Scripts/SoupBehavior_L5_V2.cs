@@ -109,15 +109,19 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         isSelected = true;
     }
 
-    
-    
 
+    public Vector3 soupPositionBound = new Vector3(2.20369f, 1.2f, 9.95782f);
     private void OnMouseDrag()
     {
         if (stage == STAGE_pickDragging)
         {
             getImpactPoint(movementSurface);
             transform.position = impactPoint + offset;
+            Vector3 clampedPos = transform.position;
+            clampedPos.x = Mathf.Min(clampedPos.x, soupPositionBound.x);
+            clampedPos.y = Mathf.Min(clampedPos.y, soupPositionBound.y);
+            clampedPos.z = Mathf.Min(clampedPos.z, soupPositionBound.z);
+            transform.position = clampedPos;
         }
     }
     private void OnMouseUp()
@@ -223,7 +227,8 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     public Vector3 impactPoint;
     Ray ray;
     RaycastHit hit;
-    public Vector3 offset; 
+    public Vector3 offset;
+    //public Transform debug_Sphere; 
     public bool getImpactPoint(Collider collider)
     {
 
@@ -232,6 +237,7 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         {
             impactPoint = hit.point;
 
+            //debug_Sphere.position = impactPoint;
             return true;
         }
         return false;
