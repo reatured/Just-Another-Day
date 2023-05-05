@@ -64,7 +64,7 @@ public class SisterFadeOut_L5 : MonoBehaviour
 
             float colorPercent = 1f * currentHealth / totalHealth;
             matColor = new Color(colorPercent, colorPercent, colorPercent, 1);
-
+            colorPercent = utilityScript.remap(colorPercent, 0, 1, 0.5f, 1);
             foreach (Material mat in sisterMaterials)
             {
                 Color startColor = MK.Toon.Properties.albedoColor.GetValue(mat);
@@ -77,7 +77,7 @@ public class SisterFadeOut_L5 : MonoBehaviour
 
             if (currentHealth <= 0 && sisterDisappearEvent != null)
             {
-                Invoke("disableMeshes", animationDuration);
+                //Invoke("disableMeshes", animationDuration);
                 sisterDisappearEvent.Invoke();
             }
         }

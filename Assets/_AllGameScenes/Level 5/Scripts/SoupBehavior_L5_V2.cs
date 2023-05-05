@@ -43,7 +43,8 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
                 if(stage == STAGE_PutSoupBack)
                 {
                     print("next object");
-                    level5Manager.nextStage(); 
+                    lerpEndEvent.AddListener(level5Manager.nextStage);
+                    //level5Manager.nextStage(); 
                 }
             }
             StartCoroutine(lerpCoroutine);
@@ -94,7 +95,7 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
         }else if(stage == STAGE_ClickToPour)
         {
             
-            lerpEndEvent.AddListener(pickUp);
+            lerpEndEvent.AddListener(pickUp); 
             lerpEndEvent.AddListener(emptySoup);
             lerpEndEvent.AddListener(goToStage_Last);
 

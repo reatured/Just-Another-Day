@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Soup
   - Painting
+  - Table
   layers:
   - Default
   - TransparentFX
