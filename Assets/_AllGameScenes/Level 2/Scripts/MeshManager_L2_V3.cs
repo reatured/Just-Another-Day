@@ -8,6 +8,8 @@ using UnityEngine.Events;
 //C: center
 public class MeshManager_L2_V3 : MonoBehaviour
 {
+    public bool showPinMesh = true; 
+
     public PinOnVertex_L2_V3[] pinsLeft, pinsRight, pinsInOrder;
     public Transform head;
     public Transform tail;

@@ -53,10 +53,13 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
             }
         }
 
+        
+
         //set only one active pin collider 
         for (int i = 0; i < _length; i++)
         {
             pinsInOrder[i].GetComponent<Collider>().enabled = false;
+            pinsInOrder[i].GetComponent<MeshRenderer>().enabled = bearMeshManager.showPinMesh; 
         }
 
 

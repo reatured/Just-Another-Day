@@ -41,7 +41,7 @@ public class PinOnVertex_L2_V3 : MonoBehaviour
         offset = offset.normalized * offsetMultiplier;
         vecOffset = offset;
         VertPosition = VertPosition;
-
+        print("Set offset");
     }
 
 

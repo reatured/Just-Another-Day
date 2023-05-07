@@ -1,15 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using Unity.Mathematics;
+//attached to needle 1 May 5th, 2023
 
 public class NeedleDraggingBehavior_L2_V3 : MonoBehaviour
 {
     public GameObject currentHole;
     public GameObject bearModel; //facing right
     public Transform trans_tiltingRight, trans_tiltingLeft;
-    public float tiltingMultiplier = 1f; 
+    public float tiltingMultiplier = 1f;
+    public bool canDrag = false;//only can drag when the bear is picked up!
+    public bool CanDrag
+    {
+        get { return canDrag; }
+        set { canDrag = value;
+            ropeHeadPinScript.canUpdatePos = canDrag;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +24,12 @@ public class NeedleDraggingBehavior_L2_V3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = getImpactPoint();
-        getRotation(); 
+        if(canDrag)
+        {
+            transform.position = getImpactPoint();
+            getRotation();
+        }
+        
     }
 
     public void getRotation()
@@ -66,5 +75,12 @@ public class NeedleDraggingBehavior_L2_V3 : MonoBehaviour
     private void OnDisable()
     {
         Cursor.visible = true;
+    }
+
+    //automatic enable dragging of both the needle and the rope
+    public Rope_PinOnRope_PosUpdate_L2_V4 ropeHeadPinScript; 
+    public void toggleDrag()
+    {
+        CanDrag = !CanDrag;
     }
 }
