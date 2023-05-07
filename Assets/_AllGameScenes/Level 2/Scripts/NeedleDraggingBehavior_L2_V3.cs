@@ -13,6 +13,7 @@ public class NeedleDraggingBehavior_L2_V3 : MonoBehaviour
         get { return canDrag; }
         set { canDrag = value;
             ropeHeadPinScript.canUpdatePos = canDrag;
+            print("Can Drag: " + canDrag);
         }
     }
     // Start is called before the first frame update

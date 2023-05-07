@@ -13,6 +13,7 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator_Controller = GetComponent<Animator>();
         PinOnVertex_L2_V3[] pinsLeft, pinsRight;
         pinsLeft = bearMeshManager.pinsLeft; //original array from mesh manager
         pinsRight = bearMeshManager.pinsRight;
@@ -71,7 +72,8 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
     }
 
     public Transform stitchingCollider;
-    public Transform lookAtTrans; 
+    public Transform lookAtTrans;
+    public Animator animator_Controller;
     public void stitchTheHole()
     {
         PinOnVertex_L2_V3 pin = pinsInOrder[currentPin];
@@ -83,7 +85,8 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
         pin.setColor(Color.red);
 
         alignColliderSurface();
-
+        //trigger the animation 
+        animator_Controller.SetTrigger("Stitching");
 
     }
 
