@@ -41,6 +41,7 @@ public class Object_Selection_L5_V3 : MonoBehaviour
                 cursorScript.ShowCursor = false;
                 cursorScript.checkSelection = false;
                 Selected = false;
+                transform.parent = leftHand; 
             }
             else
             {
@@ -48,6 +49,7 @@ public class Object_Selection_L5_V3 : MonoBehaviour
                 transform.rotation = originalRotation;
                 cursorScript.ShowCursor = true;
                 cursorScript.checkSelection = true;
+                transform.parent = null; 
             }
         }
     }

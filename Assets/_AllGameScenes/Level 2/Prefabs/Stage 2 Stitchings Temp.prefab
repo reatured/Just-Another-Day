@@ -289,6 +289,7 @@ MonoBehaviour:
   currentPin: 1
   stitchingCollider: {fileID: 5329650243127496892}
   lookAtTrans: {fileID: 1341968214}
+  animator_Controller: {fileID: 0}
 --- !u!114 &2545226570063307468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,8 +307,10 @@ MonoBehaviour:
   trans_tiltingRight: {fileID: 2655100033257039347}
   trans_tiltingLeft: {fileID: 2655100033934832304}
   tiltingMultiplier: 0.2
+  canDrag: 0
   movementSurface: {fileID: 2545226569906518370}
   impactPoint: {x: 0, y: 0, z: 0}
+  ropeHeadPinScript: {fileID: 0}
 --- !u!1001 &2545226570431026523
 PrefabInstance:
   m_ObjectHideFlags: 0
