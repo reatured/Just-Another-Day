@@ -6,6 +6,7 @@ using MK.Toon;
 
 public class PaintingBehavior_L5_V2 : MonoBehaviour
 {
+    public bool onStage = false;
     public GameObject objectToPickUp;
     public GameObject objectOfRestTransform;
     public Transform trans_PickUp, trans_rest;
@@ -18,7 +19,7 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
 
     public int STAGE_pickUp = 0;
     public int STAGE_pickUpAnimating = 1;
-    public int STAGE_pickDragging = 2;
+    public int STAGE_pickDragging = 100;
     public int STAGE_ClickToTear = 3;
     public int STAGE_PutPaintingBack = 4;
 
@@ -74,6 +75,7 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!onStage) return; 
         if (stage == STAGE_pickUpAnimating || stage == STAGE_pickDragging || stage == STAGE_PutPaintingBack)
         {
             if (Input.GetMouseButtonDown(0))
@@ -87,20 +89,14 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
             }
         }
     }
-    private void OnEnable()
-    {
-        fullPainting.SetActive(false);
-    }
-    private void OnDisable()
-    {
-        //fullPainting.SetActive(true);
-    }
     private void OnMouseDown()
     {
+        if (!onStage) return;
+        print("paper selected");
         if (stage == STAGE_pickUp)
         {
             nextStage();
-            lerpEndEvent.AddListener(goToStage_Drag);
+            lerpEndEvent.AddListener(goToStage_ClickToTear);
             PickedUp = true;
         }
         else if (stage == STAGE_pickDragging)
@@ -119,22 +115,35 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
             }
             GetComponent<Animator>().SetTrigger("Tear");
         }
+        //isSelected = true;
+    }
+
+    private void OnMouseEnter()
+    {
+        if (!onStage) return;
         isSelected = true;
     }
-    private void OnMouseDrag()
+    private void OnMouseExit()
     {
-        if (stage == STAGE_pickDragging && canDrag)
-        {
-
-                getImpactPoint(movementSurface);
-                transform.position = impactPoint + offset;
-            
-        }
+        if (!onStage) return;
+        isSelected = false;
     }
+    //private void OnMouseDrag()
+    //{
+    //    if (!onStage) return;
+    //    if (stage == STAGE_pickDragging && canDrag)
+    //    {
+
+    //            getImpactPoint(movementSurface);
+    //            transform.position = impactPoint + offset;
+            
+    //    }
+    //}
     private void OnMouseUp()
     {
+        if (!onStage) return;
         canDrag = false;
-        isSelected = false;
+        //isSelected = false;
         Cursor.visible = true;
 
     }

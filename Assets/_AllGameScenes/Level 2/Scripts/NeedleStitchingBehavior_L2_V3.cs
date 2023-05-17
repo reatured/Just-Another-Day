@@ -86,7 +86,12 @@ public class NeedleStitchingBehavior_L2_V3 : MonoBehaviour
 
         alignColliderSurface();
         //trigger the animation 
-        animator_Controller.SetTrigger("Stitching");
+
+        if(animator_Controller != null)
+        {
+            animator_Controller.SetTrigger("Stitching");
+        }
+        
 
     }
 
