@@ -130,7 +130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-805346
+  m_Name: pb_Mesh-12492
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3705,7 +3705,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-805054
+  m_Name: pb_Mesh-12200
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3869,7 +3869,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-805356
+  m_Name: pb_Mesh-12502
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15154,9 +15154,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 90506532}
     m_Modifications:
+    - target: {fileID: 1562107931, guid: 7381174bdf0034e4592b16f5fc077a42, type: 3}
+      propertyPath: startFromStage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1566467542, guid: 7381174bdf0034e4592b16f5fc077a42, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6339517516815536452, guid: 7381174bdf0034e4592b16f5fc077a42,
         type: 3}
@@ -15217,6 +15221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155571645421297914, guid: 7381174bdf0034e4592b16f5fc077a42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7381174bdf0034e4592b16f5fc077a42, type: 3}
@@ -16641,7 +16650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc9589311845b40b655182c914a1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startFromStage: 2
+  startFromStage: 4
   stages:
   - {fileID: 868989625}
   - {fileID: 364804845}

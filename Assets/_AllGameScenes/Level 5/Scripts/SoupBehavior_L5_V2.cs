@@ -181,7 +181,7 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     public GameObject inactiveSoup; 
     private void OnDisable()
     {
-        inactiveSoup.SetActive(true); 
+        inactiveSoup.SetActive(true);
         print("soup disabled");
     }
 
