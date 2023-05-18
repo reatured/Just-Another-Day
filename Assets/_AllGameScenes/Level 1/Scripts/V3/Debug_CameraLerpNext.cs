@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Debug_CameraLerpNext : MonoBehaviour
 {
@@ -49,6 +51,7 @@ public class Debug_CameraLerpNext : MonoBehaviour
         StartCoroutine(animateLerp());
     }
     public LevelManager lm;
+    public Volume vol; 
     IEnumerator animateLerp()
     {
         float journey = (Time.time - startTime) / lerpDuration;
@@ -59,11 +62,16 @@ public class Debug_CameraLerpNext : MonoBehaviour
             mainCam.rotation = Quaternion.Lerp(startQua, endQua, journey);
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / lerpDuration;
+            if (currentCam == 0)
+            {
+                fadeIn.openEye(); 
+            }
         }
         mainCam.position = endPos;
         mainCam.rotation = endQua;
 
+
         fadeIn.fadeInScene();
-        
     }
+
 }

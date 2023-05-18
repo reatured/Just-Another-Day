@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,16 +19,16 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
 
     public int STAGE_pickUp = 0;
     public int STAGE_pickUpAnimating = 1;
-    public int STAGE_pickDragging = 100;
     public int STAGE_ClickToTear = 3;
-    public int STAGE_PutBearBack = 4;
+    public int STAGE_FinishingLevel = 4;
 
 
     public LevelManager level5Manager;
     public MeshCollider[] discPiecesColliders; 
     private bool canDrag = false;
 
-    public LevelManager gameManager; 
+    public LevelManager gameManager;
+    public float delayToNextLevel = 3f; 
 
     public bool PickedUp //for lerp animation
     {
@@ -45,10 +46,10 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
             else
             {
                 lerpCoroutine = lerpPosition(objectToPickUp.transform, trans_rest, objectToPickUp.transform);
-                if (stage == STAGE_PutBearBack)
+                if (stage == STAGE_FinishingLevel)
                 {
-                    print("next object");
-                    gameManager.nextStageAfterSeconds(3f);
+
+                    
                 }
             }
             StartCoroutine(lerpCoroutine);
@@ -67,7 +68,7 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
     void Update()
     {
         if (!onStage) return;
-        if (stage == STAGE_pickUpAnimating || stage == STAGE_pickDragging || stage == STAGE_PutBearBack)
+        if (stage == STAGE_pickUpAnimating)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -90,14 +91,6 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
             lerpEndEvent.AddListener(goToStage_ClickToTear);
             PickedUp = true;
         }
-        else if (stage == STAGE_pickDragging)
-        {
-            StopAllCoroutines();
-            Cursor.visible = false;
-            getImpactPoint(movementSurface);
-            offset = transform.position - impactPoint;
-            canDrag = true;
-        }
         else if (stage == STAGE_ClickToTear)
         {
             
@@ -116,19 +109,26 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
 
                     if(shouldGoNextStage)
                     {
-                        nextStage(); 
+                        stage = STAGE_FinishingLevel;
                     }
                     break;
                     
                 }
             }
         }
-        else if (stage == STAGE_PutBearBack)
+        else if (stage == STAGE_FinishingLevel)
         {
-            lerpEndEvent.AddListener(nextStage);
-
-            PickedUp = false;
+            foreach (MeshCollider col in discPiecesColliders)
+            {
+               Rigidbody rb = col.AddComponent<Rigidbody>();
+                rb.useGravity = true;
+                rb.isKinematic = false;
+                
+                
+            }
+            gameManager.nextStageAfterSeconds(delayToNextLevel);
         }
+
         //isSelected = true;
     }
 
@@ -171,10 +171,7 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
         print("nextStage");
         stage++;
     }
-    public void goToStage_Drag()
-    {
-        stage = STAGE_pickDragging;
-    }
+
 
     public void goToStage_ClickToTear()
     {

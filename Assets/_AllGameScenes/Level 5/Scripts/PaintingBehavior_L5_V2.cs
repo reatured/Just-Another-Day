@@ -92,7 +92,6 @@ public class PaintingBehavior_L5_V2 : MonoBehaviour
     private void OnMouseDown()
     {
         if (!onStage) return;
-        print("paper selected");
         if (stage == STAGE_pickUp)
         {
             nextStage();

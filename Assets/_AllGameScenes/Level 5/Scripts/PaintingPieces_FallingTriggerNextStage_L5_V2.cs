@@ -8,6 +8,7 @@ public class PaintingPieces_FallingTriggerNextStage_L5_V2 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        print(collision.gameObject.name);
         if (collision.gameObject.tag == "Table" && this.enabled == true) //go to next stage when the painting collide with the table.
         {
             print("collision with table");
@@ -22,7 +23,7 @@ public class PaintingPieces_FallingTriggerNextStage_L5_V2 : MonoBehaviour
 
     private void OnEnable()
     {
-        print("enabled");
+
 
         dragCollisionSurface.SetActive(false);
     }

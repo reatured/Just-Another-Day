@@ -25,7 +25,10 @@ public class Disc_TearBehavior_L5_V5 : MonoBehaviour
     public void tear()
     {
         isTeard = true;
-        tearMagnitude /= 3;
+        tearMagnitude /= 10;
+        moveDirection = directionTrans.position - this.transform.position;
+        moveDirection = moveDirection.normalized;
+        directionTrans.position = transform.position + moveDirection * tearMagnitude;
         startTime = Time.time;  
         StartCoroutine(lerpPosition(transform, directionTrans, transform));
     }

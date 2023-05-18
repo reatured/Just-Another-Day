@@ -9,7 +9,7 @@ public class SoupBehavior_L5_V2 : MonoBehaviour
     public Transform trans_PickUp, trans_rest;
     public Transform trans_Pour; 
     private bool pickedUp = false; //false: on the table
-    [SerializeField] private bool defaultBehavior = true;
+
     public int stage = 0;
     public bool isSelected = false;
     IEnumerator lerpCoroutine;

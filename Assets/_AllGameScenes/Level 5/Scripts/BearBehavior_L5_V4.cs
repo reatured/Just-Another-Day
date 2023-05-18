@@ -80,7 +80,7 @@ public class BearBehavior_L5_V4 : MonoBehaviour
     private void OnMouseDown()
     {
         if (!onStage) return;
-        print("paper selected");
+
         if (stage == STAGE_pickUp)
         {
             nextStage();
