@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BearBehavior_L5_V4 : MonoBehaviour
+public class DiscBehavior_L5_V5 : MonoBehaviour
 {
     public bool onStage = false;
     public GameObject objectToPickUp;
@@ -24,9 +24,11 @@ public class BearBehavior_L5_V4 : MonoBehaviour
 
 
     public LevelManager level5Manager;
-    public Animator animator; 
-
+    public MeshCollider[] discPiecesColliders; 
     private bool canDrag = false;
+
+    public LevelManager gameManager; 
+
     public bool PickedUp //for lerp animation
     {
         set
@@ -46,7 +48,7 @@ public class BearBehavior_L5_V4 : MonoBehaviour
                 if (stage == STAGE_PutBearBack)
                 {
                     print("next object");
-                    level5Manager.nextStage();
+                    gameManager.nextStageAfterSeconds(3f);
                 }
             }
             StartCoroutine(lerpCoroutine);
@@ -57,7 +59,8 @@ public class BearBehavior_L5_V4 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        discPiecesColliders = GetComponentsInChildren<MeshCollider>();
+        foreach (MeshCollider col in discPiecesColliders) { col.enabled = false; }
     }
 
     // Update is called once per frame
@@ -97,14 +100,34 @@ public class BearBehavior_L5_V4 : MonoBehaviour
         }
         else if (stage == STAGE_ClickToTear)
         {
+            
+            foreach (MeshCollider col in discPiecesColliders) {
+                if (getImpactPoint((MeshCollider)col)) {
+                    col.GetComponent<Disc_TearBehavior_L5_V5>().tear();
 
-            animator.SetTrigger("Tear");
+                    bool shouldGoNextStage = true;
+                    foreach (MeshCollider col2 in discPiecesColliders)
+                    {
+                        if (col2.GetComponent<Disc_TearBehavior_L5_V5>().isTeard == false)
+                        {
+                            shouldGoNextStage = false;
+                        }
+                    }
+
+                    if(shouldGoNextStage)
+                    {
+                        nextStage(); 
+                    }
+                    break;
+                    
+                }
+            }
         }
-        else if(stage == STAGE_PutBearBack)
+        else if (stage == STAGE_PutBearBack)
         {
             lerpEndEvent.AddListener(nextStage);
 
-            PickedUp = false; 
+            PickedUp = false;
         }
         //isSelected = true;
     }
@@ -158,6 +181,8 @@ public class BearBehavior_L5_V4 : MonoBehaviour
         canDrag = false;
         PickedUp = true;
         stage = STAGE_ClickToTear;
+        //GetComponent<Collider>().enabled = false;   
+        foreach (MeshCollider col in discPiecesColliders) { col.enabled = true; }
     }
 
     //===============Helper Script=======================
@@ -165,21 +190,26 @@ public class BearBehavior_L5_V4 : MonoBehaviour
 
     public float animationDuration;
     public UnityEvent lerpEndEvent;
-    float journey = 0;
-    bool firstTriggered = false;
+    public float journey = 0;
+
 
     IEnumerator lerpPosition(Transform start, Transform end, Transform movingTrans, float eventWaitTime = 0.3f)
     {
         print("start lerp");
         journey = (Time.time - startTime) / animationDuration;
         //bool activated = false;
-
+        Vector3 startPos = start.position;
+        Vector3 endPos = end.position;
+        Quaternion startRotation = start.rotation; 
+        Quaternion endRotation = end.rotation;
+        Vector3 startScale = start.localScale;
+        Vector3 endScale = end.localScale;
         while (journey < 1.1f)
         {
             //print("running" + Vector3.Lerp(start, end, journey) + "\nJourney" + journey);
-            movingTrans.position = Vector3.Lerp(start.position, end.position, journey);
-            movingTrans.rotation = Quaternion.Slerp(start.rotation, end.rotation, journey);
-            movingTrans.localScale = Vector3.Lerp(start.localScale, end.localScale, journey);
+            movingTrans.position = Vector3.Lerp(startPos, endPos, journey);
+            movingTrans.rotation = Quaternion.Slerp(startRotation, endRotation, journey);
+            movingTrans.localScale = Vector3.Lerp(startScale, endScale, journey);
             yield return new WaitForFixedUpdate();
             journey = (Time.time - startTime) / animationDuration;
 
@@ -190,9 +220,9 @@ public class BearBehavior_L5_V4 : MonoBehaviour
             lerpEndEvent.RemoveAllListeners();
         }
 
-        movingTrans.position = end.position;
-        movingTrans.rotation = end.rotation;
-        movingTrans.localScale = end.localScale;
+        movingTrans.position = endPos;
+        movingTrans.rotation = endRotation;
+        movingTrans.localScale = endScale;
     }
 
     //===============Helper Script=======================

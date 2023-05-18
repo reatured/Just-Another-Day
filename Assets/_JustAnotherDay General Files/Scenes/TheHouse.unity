@@ -16650,7 +16650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc9589311845b40b655182c914a1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startFromStage: 4
+  startFromStage: 5
   stages:
   - {fileID: 868989625}
   - {fileID: 364804845}
@@ -20752,7 +20752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6493262780439610354
 Transform:
   m_ObjectHideFlags: 0

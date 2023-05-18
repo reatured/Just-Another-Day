@@ -3270,46 +3270,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3391281107243759505, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_Name
-      value: Bear Arm
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.042981945
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.0770478
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7901349
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.6129331
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645651340648454251, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 75.604
-      objectReference: {fileID: 0}
     - target: {fileID: 6339517516815536452, guid: 7381174bdf0034e4592b16f5fc077a42,
         type: 3}
       propertyPath: m_Name
@@ -3369,11 +3329,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8325559533724900127, guid: 7381174bdf0034e4592b16f5fc077a42,
-        type: 3}
-      propertyPath: m_Name
-      value: Bear Body
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7381174bdf0034e4592b16f5fc077a42, type: 3}
