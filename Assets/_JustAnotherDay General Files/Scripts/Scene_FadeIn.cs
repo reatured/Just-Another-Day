@@ -22,7 +22,7 @@ public class Scene_FadeIn : MonoBehaviour
         //fadeInScene();
     }
 
-    float startTime;
+    public float startTime;
     public float animationDuration = 0.5f;
     public UnityEvent fadingEndEvent;
     public Debug_CameraLerpNext camScript; 
@@ -80,32 +80,34 @@ public class Scene_FadeIn : MonoBehaviour
     public Material eyeMat; 
     public void openEye()
     {
+        print("open Eye");
+        startTime = Time.time; 
         StartCoroutine(blink(-0.2f, 1.2f));
     }
 
     public void closeEye()
     {
-        lerpEndEvent.AddListener(closeEyeEvent);
+        print("close eye");
+        startTime  = Time.time; 
         StartCoroutine(blink(1.2f, -0.2f));
     }
 
-    UnityEvent lerpEndEvent = null; 
+    UnityEvent lerpEndEvent = null;
+
     IEnumerator blink (float start, float end)
     {
-        float journey = (Time.time - startTime-1) / animationDuration;
+        float _StartTime = startTime; 
+        float journey = (Time.time - startTime) / animationDuration;
 
         while (journey < 1.1f)
         {
             float value = utilityScript.remap(journey, 0, 1, start, end);
             eyeMesh.material.SetFloat("_BlinkDegree", value);
             yield return new WaitForEndOfFrame();
-            journey = (Time.time - startTime) / animationDuration;
+            journey = (Time.time - _StartTime) / animationDuration;
 
         }
-        if(lerpEndEvent != null)
-        {
-            lerpEndEvent.Invoke();
-        }
+
     }
 
     public void closeEyeEvent()

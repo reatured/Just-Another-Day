@@ -3,8 +3,8 @@ using UnityEngine;
 public class IdleTimeDetector : MonoBehaviour
 {
     public float idleThreshold = 5f; // Idle threshold in seconds
-    private float idleTimer = 0f;
-
+    public float idleTimer = 0f;
+    public GameObject credit; 
     private void Update()
     {
 
@@ -25,6 +25,8 @@ public class IdleTimeDetector : MonoBehaviour
                 // Perform desired actions when idle time is detected
                 Debug.Log("Idle time detected!");
                 // Add your code here to handle the idle state
+                credit.SetActive(true);
+                Destroy(this);
             }
         }
     }

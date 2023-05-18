@@ -5,11 +5,12 @@ using UnityEngine;
 public class PourOutSoup_L4_V3 : MonoBehaviour
 {
     public LevelManager lm;
-    public float nextSceneTransitionTime = 5f; 
+    public float nextSceneTransitionTime = 5f;
     private void OnMouseDown()
     {
         pourOutSoup();
         lm.nextStageAfterSeconds(nextSceneTransitionTime);
+        GetComponent<Collider>().enabled = false;
     }
 
     public GameObject[] soupInPot;

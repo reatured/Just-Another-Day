@@ -81,6 +81,7 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
             }
         }
     }
+    public Scene_FadeIn fadeInScript;
     private void OnMouseDown()
     {
         if (!onStage) return;
@@ -126,12 +127,17 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
                 
                 
             }
+            fadeInScript.closeEye();
+            bgMusic.Stop();
+            checkIdleTimerScript.enableTimer();
             gameManager.nextStageAfterSeconds(delayToNextLevel);
+            stage = 100;
         }
 
         //isSelected = true;
     }
-
+    public AudioSource bgMusic; 
+    public CheckIdleTimer checkIdleTimerScript;
     private void OnMouseEnter()
     {
         if (!onStage) return;
