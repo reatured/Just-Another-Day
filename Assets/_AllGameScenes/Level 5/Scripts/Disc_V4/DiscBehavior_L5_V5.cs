@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class DiscBehavior_L5_V5 : MonoBehaviour
 {
@@ -129,12 +130,19 @@ public class DiscBehavior_L5_V5 : MonoBehaviour
             }
             fadeInScript.closeEye();
             bgMusic.Stop();
-            checkIdleTimerScript.enableTimer();
-            gameManager.nextStageAfterSeconds(delayToNextLevel);
+
+            //gameManager.nextStageAfterSeconds(delayToNextLevel);
+            Invoke("reload", 5f);
+            utilityScript.restarted = true;
             stage = 100;
         }
 
         //isSelected = true;
+    }
+
+    public void reload()
+    {
+        SceneManager.LoadScene(1);
     }
     public AudioSource bgMusic; 
     public CheckIdleTimer checkIdleTimerScript;

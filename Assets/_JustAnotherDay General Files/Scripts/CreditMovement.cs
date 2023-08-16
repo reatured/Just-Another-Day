@@ -19,10 +19,16 @@ public class CreditMovement : MonoBehaviour
     void Update()
     {
         _transform.Translate(Vector3.up * upSpeed * Time.deltaTime) ;
-        if(_transform.position.y > upperBounds)
+        
+        if(_transform.anchoredPosition.y > upperBounds)
         {
             
             SceneManager.LoadScene(0);
+        }
+        else
+        {
+            print(_transform.anchoredPosition);
+            print(upperBounds);
         }
         y = _transform.position.y;
     }

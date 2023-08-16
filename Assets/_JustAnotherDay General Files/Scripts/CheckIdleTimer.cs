@@ -4,25 +4,51 @@ using UnityEngine;
 
 public class CheckIdleTimer : MonoBehaviour
 {
-    public bool restarted = false; 
-    public IdleTimeDetector script;
+    public bool restarted = false;
+
+    public GameObject paper;
+    public float startTime;
+    public float waitTIme = 3f;
+    public Scene_FadeIn fadeIn;
+    public GameObject credit;
+    public Stage1 paperScript;
     // Start is called before the first frame update
     void Start()
     {
         print(utilityScript.restarted);
-        if(restarted == true)
+        restarted = utilityScript.restarted;
+        if (restarted == true)
         {
-            script.enabled = true;
+            StartCoroutine(disablePaperWithDelay());
+            startTime = Time.time;
         }
-        else
+
+    }
+    private void Update()
+    {
+        if (restarted == true)
         {
-            script.enabled= false;
+            if (Time.time - startTime > waitTIme)
+            {
+                fadeIn.fadeOutScene();
+                credit.SetActive(true);
+            }
+
         }
     }
 
-    // Update is called once per frame
-    public void enableTimer()
+    public void disablePaper()
     {
-        script.enabled = true;
+
     }
+
+    IEnumerator disablePaperWithDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        paper.SetActive(false);
+
+    }
+
+    
+
 }

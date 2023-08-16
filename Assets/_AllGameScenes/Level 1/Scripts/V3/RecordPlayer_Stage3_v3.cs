@@ -84,6 +84,7 @@ public class RecordPlayer_Stage3_v3 : MonoBehaviour
         disc.enabled = true;
         if (!buttonReadyToShow)
         {
+            if(utilityScript.restarted == false)
             StartCoroutine(enableNextLevelButton());
         }
     }

@@ -5873,6 +5873,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4064638188620689800, guid: a4eb02b4279e3e04db89b47c4245663b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -8371938672128623813, guid: a6c0980254aa5c44390612c130f6daed,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4eb02b4279e3e04db89b47c4245663b, type: 3}
 --- !u!4 &1042755564 stripped
@@ -16934,12 +16940,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000016687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be4e5a3668cb2db4086717fd37307eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleThreshold: 1
+  idleThreshold: 0
   idleTimer: 0
   credit: {fileID: 2135865601}
 --- !u!114 &2000016694
@@ -16955,7 +16961,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restarted: 0
-  script: {fileID: 2000016693}
+  paper: {fileID: 6493262780439610353}
+  startTime: 0
+  waitTIme: 3
+  fadeIn: {fileID: 77589281}
+  credit: {fileID: 2135865601}
+  paperScript: {fileID: 0}
 --- !u!1 &2052881637
 GameObject:
   m_ObjectHideFlags: 0
@@ -18779,8 +18790,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.9
-  m_fontSizeBase: 62.9
+  m_fontSize: 32.08
+  m_fontSizeBase: 32.08
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18842,7 +18853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 2135865602}
-  upSpeed: 25.6
+  upSpeed: 130
   upperBounds: 1100
   y: 0
 --- !u!1 &2142702810
